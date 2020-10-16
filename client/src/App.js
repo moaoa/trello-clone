@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import TeamsSidebar from './components/TeamsSidebar/TeamsSidebar'
+import Boards from './components/Boards/Boards'
 import './App.css';
+import io from 'socket.io-client'
+import {BrowserRouter as Router} from 'react-router-dom'
+
 
 function App() {
+  const socket = io('http://localhost:5000')
+  
+  socket.on('room', (socket) => {
+    console.log(socket);
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <TeamsSidebar/>
+        <Boards/>  
+      </div>
+    </Router>
   );
 }
 

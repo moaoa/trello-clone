@@ -1,0 +1,7 @@
+.boardsHeader {
+    padding: 20px 40px !important;
+    grid-column: 1/9;
+    background-color: #f4f8fa;
+    display: flex;
+    justify-content: flex-end;
+}

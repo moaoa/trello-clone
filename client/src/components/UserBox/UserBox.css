@@ -1,0 +1,21 @@
+.UserBox {
+    background-color: #ffffff;
+    padding: 0 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+}
+.UserBox span {
+    font-size: 15px;
+    margin: 0 10px;
+    color: #000000;
+    font-weight: bolder;
+}
+
+.UserBox img {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
