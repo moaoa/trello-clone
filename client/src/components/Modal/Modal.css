@@ -1,0 +1,15 @@
+.Modal {
+    width: 40vw;
+    z-index: 200;
+    transition: all 0.5s ease-in-out;
+    position: absolute;
+    left: 50vw;
+    top: 50px;
+    transform: translate(-50%, -200vh);
+    background-color: white;
+    padding: 20px;
+}
+
+.isOpen {
+    transform: translate(-50%, 0);
+}
