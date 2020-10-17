@@ -1,20 +1,10 @@
 import constants from '../actions/constants'
 import generateId from './projectUtils'
-// const initailState = {
-//     noStage: [
-//             {id: generateId(), title: 'task 1', description: 'description'},
-//             {id: generateId(), title: 'task 1', description: 'description'}
-//     ],
-//     inProgress:  [
-//             {id: generateId(), title: 'task 1', description: 'description'},
-//             {id: generateId(), title: 'task 1', description: 'description'}
-//     ],
-//     completed: [
-//             {id: generateId(), title: 'task 1', description: 'description'},
-//             {id: generateId(), title: 'task 1', description: 'description'}
-//     ],
-// }
 const initailState = {
+    projectName: 'Project',
+    imgUrl:'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+    admin:'',
+    members:[],
     noStage: [],
     inProgress: [],
     completed: []

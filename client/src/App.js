@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TeamsSidebar from './components/TeamsSidebar/TeamsSidebar'
+import Sidebar from './components/TeamsSidebar/Sidebar'
 import Boards from './components/Boards/Boards'
 import './App.css';
 import io from 'socket.io-client'
@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <TeamsSidebar/>
+        <Sidebar/>
         <Boards/>  
       </div>
     </Router>
