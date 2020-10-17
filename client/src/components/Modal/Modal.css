@@ -1,15 +1,32 @@
 .Modal {
-    width: 40vw;
-    z-index: 200;
-    transition: all 0.5s ease-in-out;
-    position: absolute;
-    left: 50vw;
-    top: 50px;
-    transform: translate(-50%, -200vh);
-    background-color: white;
-    padding: 20px;
+  width: 40vw;
+  z-index: 200;
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  left: 50vw;
+  top: 50px;
+  transform: translate(-50%, -200vh);
+  background-color: white;
+  padding: 20px;
+}
+
+.overlay {
+  transition: all 0.5s ease-in-out;
+  background-color: #333333;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 199;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+.show {
+  visibility: visible;
+  opacity: 0.6;
 }
 
 .isOpen {
-    transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
 }

@@ -1,35 +1,43 @@
 .App {
-    padding: 20px 50px;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    column-gap: 20px;
-    --badge-background: #eaeff0;
-    --badge-color: #7f898d;
+  padding: 20px 50px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  column-gap: 20px;
+  --badge-background: #eaeff0;
+  --badge-color: #7f898d;
 }
 .cardShadow {
-    -webkit-box-shadow: 2px 2px 6px -4px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: 2px 2px 6px -4px rgba(0, 0, 0, 0.75);
-    box-shadow: 2px 2px 6px -4px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 2px 2px 6px -4px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 2px 2px 6px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 2px 2px 6px -4px rgba(0, 0, 0, 0.75);
 }
 
 .flex-spaceBetween {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .badge {
-    font-size: 15px;
-    background: var(--badge-background);
-    padding: 5px 12px;
-    color: var(--badge-color);
+  font-size: 15px;
+  background: var(--badge-background);
+  padding: 5px 12px;
+  color: var(--badge-color);
 }
 
 .addTeamIcon {
-    fill: #a1acb7;
-    font-size: 1.5rem;
+  fill: #a1acb7;
+  font-size: 1.5rem;
 }
 
 .pointer:hover {
-    cursor: pointer;
+  cursor: pointer;
+}
+.btn {
+  border: none;
+  padding: 5px 10px;
+  background-color: rgb(38, 101, 156);
+  color: white;
+  border-radius: 4px;
+  outline: none;
 }

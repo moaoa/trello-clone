@@ -1,0 +1,17 @@
+.InputField {
+  margin-bottom: 1em;
+  padding: 10px;
+}
+
+.InputField input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  border-bottom: #333 solid 1px;
+  width: 100%;
+}
+
+.InputField input::placeholder {
+  text-transform: capitalize;
+  color: rgb(158, 157, 157);
+}
