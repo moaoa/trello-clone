@@ -3,19 +3,17 @@ import './CreateTaskForm.css'
 import Modal from '../Modal/Modal'
 import { useForm } from 'react-hook-form'
 import InputField from '../InputField/InputField'
-import {addTask} from '../../redux/actions/tasks'
+import {addTask} from '../../redux/actions/project'
 import {useDispatch} from 'react-redux'
 
 
 export default function CreateTaskForm({operation,  toggleModal, isOpen}) {
-    const {register, handleSubmit, watch, errors, reset}  = useForm()
+    const {register, handleSubmit, errors, reset}  = useForm()
     const dispatch = useDispatch()
 
     
     const onSubmit = data => {
         toggleModal()
-        console.log(data);
-        console.log(errors);
         dispatch(addTask(operation, data))
         reset()
     }

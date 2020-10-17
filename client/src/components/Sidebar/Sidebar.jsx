@@ -1,13 +1,13 @@
 import React from 'react'
 import './Sidebar.css'
 import Header from '../Header/Header'
-import TeamsList from '../TeamsList/TeamsList'
+import ProjectsList from '../ProjectsList/projectsList'
 
 function TeamsSidebar() {
     return (
         <div className='TeamsSidebar'>
             <Header/>
-            <TeamsList/>
+            <ProjectsList/>
         </div>
     )
 }

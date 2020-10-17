@@ -1,14 +1,26 @@
 import constants from '../actions/constants'
 import generateId from './projectUtils'
 const initailState = {
-    projectName: 'Project',
-    imgUrl:'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
-    admin:'',
-    members:[],
-    noStage: [],
-    inProgress: [],
-    completed: []
+    Project :{
+        projectName: 'Project',
+        imgUrl:'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+        admin:'',
+        members:[],
+        noStage: [],
+        inProgress: [],
+        completed: []
+    },
+    Project2:{
+        projectName: 'Project2',
+        imgUrl:'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80',
+        admin:'',
+        members:[],
+        noStage: [],
+        inProgress: [],
+        completed: []
+    }
 }
+
 
 const projectReducer = (state = initailState, action) => {
     switch(action.type){
