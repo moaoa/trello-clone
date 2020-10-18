@@ -7,11 +7,11 @@ import {BrowserRouter as Router} from 'react-router-dom'
 
 
 function App() {
-  const socket = io('http://localhost:5000')
+  // const socket = io('http://localhost:5000')
   
-  socket.on('room', (socket) => {
-    console.log(socket);
-  })
+  // socket.on('room', (socket) => {
+  //   console.log(socket);
+  // })
 
   return (
     <Router>
