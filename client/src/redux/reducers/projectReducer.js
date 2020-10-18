@@ -24,11 +24,15 @@ const initailState = {
 
 
 const projectReducer = (state = initailState, action) => {
+    console.log(action);
     switch(action.type){
         case constants.ADD_TASK:
             return {
                 ...state,
-                [action.stageName]: [...state[action.stageName], {...action.task, id: generateId()}]
+                [action.projectId]:{
+                    ...state[action.projectId],
+                    [action.stageName]: [...state[action.projectId][action.stageName], {...action.task, id: generateId()}]
+                }
             }
         case constants.CREATE_PROJECT:
             return {
