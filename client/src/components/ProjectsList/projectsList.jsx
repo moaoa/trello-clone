@@ -1,18 +1,16 @@
 import React from 'react'
 import './projectsList.css'
 import ProjectItem from '../ProjectItem/ProjectItem'
-import {useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
 
 function TeamsList() {
     const projects = useSelector(state => state.project)
-    
-
     return (
-        <div className='TeamsList'>
+        <div className='ProjectsList'>
             {
                 Object.keys(projects).map(key => {
-                    const {imgUrl, projectName} = projects[key]
-                    return <ProjectItem key={key}  imgUrl={imgUrl} projectName={projectName}/>
+                    const { imgUrl, projectName } = projects[key]
+                    return <ProjectItem key={key} imgUrl={imgUrl} projectName={projectName} />
                 })
             }
         </div>
