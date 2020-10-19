@@ -1,5 +1,6 @@
 import constants from '../actions/constants'
-import generateId from './projectUtils'
+import generateId, {createProjectUtil} from './projectUtils'
+
 const initailState = {
     Project :{
         projectName: 'Project',
@@ -23,11 +24,20 @@ const initailState = {
 
 
 const projectReducer = (state = initailState, action) => {
+    console.log(action);
     switch(action.type){
         case constants.ADD_TASK:
             return {
                 ...state,
-                [action.stageName]: [...state[action.stageName], {...action.task, id: generateId()}]
+                [action.projectId]:{
+                    ...state[action.projectId],
+                    [action.stageName]: [...state[action.projectId][action.stageName], {...action.task, id: generateId()}]
+                }
+            }
+        case constants.CREATE_PROJECT:
+            return {
+                ...state,
+                [action.payload.projectName]:createProjectUtil(action.payload) 
             }
         default: return state
     }
