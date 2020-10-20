@@ -3,7 +3,7 @@ import './projectsList.css'
 import ProjectItem from '../ProjectItem/ProjectItem'
 import { useSelector } from 'react-redux'
 
-function TeamsList() {
+function ProjectsList() {
     const projects = useSelector(state => state.project)
     return (
         <div className='ProjectsList'>
@@ -17,4 +17,4 @@ function TeamsList() {
     )
 }
 
-export default TeamsList
+export default ProjectsList

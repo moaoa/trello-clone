@@ -1,5 +1,5 @@
 import constants from '../actions/constants'
-import generateId, {createProjectUtil} from './projectUtils'
+import generateId, {createProjectUtil, moveCardToEmptyCardUtil, moveCardUtil} from './projectUtils'
 
 const initailState = {
     Project :{
@@ -37,7 +37,17 @@ const projectReducer = (state = initailState, action) => {
         case constants.CREATE_PROJECT:
             return {
                 ...state,
-                [action.payload.projectName]:createProjectUtil(action.payload) 
+                [action.payload.projectName]: createProjectUtil(action.payload) 
+            }
+        case constants.MOVE_CARD:
+            return {
+                ...state,
+                [action.payload.projectName]: moveCardUtil(state[action.payload.projectName], action.payload)
+            }
+        case constants.MOVE_CARD_TO_EMPTY_STAGE:
+            return {
+                ...state,
+                [action.payload.projectId]: moveCardToEmptyCardUtil(state[action.payload.projectId], action.payload)
             }
         default: return state
     }

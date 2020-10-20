@@ -1,6 +1,6 @@
 import React from 'react'
 import './ProjectItem.css'
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 function ProjectItem({imgUrl, projectName}) {

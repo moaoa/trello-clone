@@ -4,14 +4,37 @@ import BoardItem from '../BoardItem/BoardItem'
 import {AiOutlinePlus} from 'react-icons/ai'
 import CreateTaskFrom from '../CreateTaskForm/CreateTaskForm'
 import { useState } from 'react'
+import {  useDrop } from 'react-dnd'
+import { ItemTypes } from '../../dragAndDropUtils/utils'
+import { useParams } from 'react-router-dom'
+import { moveCardToEmptyStage } from '../../redux/actions/project'
+import { useDispatch } from 'react-redux'
 
 
 export default function NoStageBoard({tasks}) {
-    const [isOpen, setIsOpen] = useState(false)
-    const toggleModal= () => setIsOpen(prevState => !prevState)
     if(!tasks) tasks=[]
+    const [isOpen, setIsOpen] = useState(false)
+    const dispatch = useDispatch()
+    const urlParams  = useParams()
+    const toggleModal= () => setIsOpen(prevState => !prevState)
+    const [{isOver}, drop]  = useDrop({
+        accept: ItemTypes.CARD,
+        collect: (monitor) => ({isOver: monitor.isOver()}),
+        drop: (item, monitor) => {
+            if(tasks.length === 0 ) {
+               dispatch( moveCardToEmptyStage(
+                {
+                    projectId: urlParams.id,
+                    dragedFrom: item.dragStage,
+                    dropStage: 'noStage',
+                    dragIndex: item.index
+                }
+            ))
+            }
+        }
+    })
     return (
-        <div className='NoStageBoard'>
+        <div className={`NoStageBoard ${isOver? 'bg-darker': ''}`} ref={drop}>
             <CreateTaskFrom isOpen={isOpen} toggleModal={toggleModal} operation='noStage' />
         
             <div className='flex-spaceBetween'>
@@ -22,7 +45,7 @@ export default function NoStageBoard({tasks}) {
                  </div>
             </div>
             {
-                tasks.map(task => <BoardItem key={task.id} {...task}/>)
+                tasks.map((task, index)=> <BoardItem stage='noStage' key={task.id} {...task} index={index}  />)
             }
         </div>
     )

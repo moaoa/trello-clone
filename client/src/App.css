@@ -45,3 +45,6 @@ a {
     text-decoration: none;
     color: inherit;
 }
+.bg-darker {
+    border: 1px solid #333;
+}

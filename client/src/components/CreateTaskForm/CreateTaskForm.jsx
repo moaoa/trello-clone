@@ -11,9 +11,7 @@ import {useParams} from 'react-router-dom'
 export default function CreateTaskForm({operation,  toggleModal, isOpen}) {
     const {register, handleSubmit, errors, reset}  = useForm()
     const dispatch = useDispatch()
-    const state = useSelector(state => state)
     const {id} = useParams()
-    console.log(state);
     
     const onSubmit = data => {
         toggleModal()
