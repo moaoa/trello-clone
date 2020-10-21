@@ -4,8 +4,6 @@ import Boards from './components/Boards/Boards'
 import './App.css';
 import io from 'socket.io-client'
 import {BrowserRouter as Router} from 'react-router-dom'
-import {DndProvider} from 'react-dnd'
-import {HTML5Backend} from 'react-dnd-html5-backend'
 
 
 function App() {
@@ -17,12 +15,12 @@ function App() {
 
   return (
     <Router>
-      <DndProvider backend={HTML5Backend}>
+      
         <div className="App">
           <Sidebar/>
           <Boards/>  
         </div>
-      </DndProvider>
+   
     </Router>
   );
 }

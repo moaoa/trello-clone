@@ -11,7 +11,7 @@ export default function Boards() {
     return (
         <div className='boards'>
             <BoardsHeader/>
-            <Route path='/' exact render={() => <div>profile page</div>} />
+            <Route path='/home'  render={() => <div>profile page</div>} />
             <Route path='/project/:id' component={ProjectContainer}/>
         </div>
     )

@@ -24,7 +24,6 @@ const initailState = {
 
 
 const projectReducer = (state = initailState, action) => {
-    console.log(action);
     switch(action.type){
         case constants.ADD_TASK:
             return {
