@@ -45,6 +45,10 @@ a {
     text-decoration: none;
     color: inherit;
 }
-.bg-darker {
-    border: 1px solid #333;
+
+.tasks {
+    transition: all 0.5s;
+    height: 100%;
+    padding: 10px;
+    border-radius: 5px;
 }

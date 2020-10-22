@@ -1,19 +1,12 @@
 import React from 'react'
 import './BoardItem.css'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { moveCard } from '../../redux/actions/project'
 import { Draggable } from 'react-beautiful-dnd';
 
 
 
-const BoardItem = ({title, description, id, index, stage}) => {
-    const dispatch = useDispatch()
-    const params = useParams()
- 
-
+const BoardItem = ({title, description, id, index}) => {
     return (
-        <Draggable draggableId={`${id}`} index={index}>
+        <Draggable draggableId={`${id}`} index={ index }>
             {
             (provided) => (
                 <div className='BoardItem cardShadow' 
@@ -23,7 +16,8 @@ const BoardItem = ({title, description, id, index, stage}) => {
                     >
                     <h4>{title}</h4>
                     <p>{description}</p>
-                </div>)
+                </div>
+                )
             }
         </Draggable>
     )

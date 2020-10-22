@@ -6,7 +6,7 @@ const DroppableHoc = (Component, stage) => {
     return (props) => (
         <Droppable droppableId={stage} >
             {
-                ( provided )=> <Component provided={provided} {...props}/>
+                ( provided, snapshot )=> <Component provided={provided} isDraggingOver={snapshot.isDraggingOver} {...props}/>
             }
         </Droppable>
         )

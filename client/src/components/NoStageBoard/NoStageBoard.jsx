@@ -11,7 +11,7 @@ import DroppableHoc from '../../Hoc/DroppableHoc'
 
 
 
-export default DroppableHoc(function NoStageBoard({tasks, provided}) {
+export default DroppableHoc(function NoStageBoard({tasks, provided, isDraggingOver}) {
     if(!tasks) tasks=[]
     const [isOpen, setIsOpen] = useState(false)
     const dispatch = useDispatch()
@@ -20,18 +20,27 @@ export default DroppableHoc(function NoStageBoard({tasks, provided}) {
 
   
     return (
-        <div className={`NoStageBoard`} {...provided.droppableProps} ref={provided.innerRef}>
+        <div className={`NoStageBoard`}
+         
+         
+         >
             <CreateTaskFrom isOpen={isOpen} toggleModal={toggleModal} operation='noStage' />
-        
-            <div className='flex-spaceBetween'>
+            <div className='flex-spaceBetween'  >
                 <h3 className='badge'>No Stage</h3>
                  <div onClick={toggleModal}>
                     <AiOutlinePlus className='addTeamIcon pointer'/>
                  </div>
             </div>
+
+            <div className="tasks" 
+                {...provided.droppableProps} 
+                ref={provided.innerRef} 
+                style={{backgroundColor: isDraggingOver? 'lightgray': '#f4f7f9'}}
+            >
             {
                 tasks.map((task, index)=> <BoardItem stage='noStage' key={task.id} {...task} index={index}  />)
             }
+            </div>
             {provided.placeholder}
         </div>
     )
