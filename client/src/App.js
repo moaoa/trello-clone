@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Sidebar from './components/Sidebar/Sidebar'
-import Boards from './components/Boards/Boards'
 import './App.css';
 import io from 'socket.io-client'
-import {BrowserRouter as Router} from 'react-router-dom'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import HomePage from './Pages/Home'
+import AuthPage from './Pages/auth/auth'
 
 
 function App() {
@@ -15,10 +15,9 @@ function App() {
 
   return (
     <Router>
-      
         <div className="App">
-          <Sidebar/>
-          <Boards/>  
+          <Route path='/' exact component={HomePage}/>
+          <Route path='/auth' component={() => <AuthPage/>}/>
         </div>
    
     </Router>

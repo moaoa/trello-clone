@@ -6,9 +6,16 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "web-push": "^3.4.4"
+    "mongoose": "^5.10.10",
+    "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "devDependencies": {
-    "dotenv": "^8.2.0"
+    "dotenv": "^8.2.0",
+    "nodemon": "^2.0.6"
   }
 }
