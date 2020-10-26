@@ -21,8 +21,6 @@ export default DroppableHoc(function NoStageBoard({tasks, provided, isDraggingOv
   
     return (
         <div className={`NoStageBoard`}
-         
-         
          >
             <CreateTaskFrom isOpen={isOpen} toggleModal={toggleModal} operation='noStage' />
             <div className='flex-spaceBetween'  >

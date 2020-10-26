@@ -14,6 +14,7 @@ export default function ProjectContainer() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const project = useSelector(state => state.project[id])
+    console.log(project);
     if(!project) return <Redirect to='/'/>
     return ( 
      
@@ -26,16 +27,7 @@ export default function ProjectContainer() {
               ) {
                 return
               }
-            console.log(
-                {
-                    projectName: id,
-                    dragStage: source.droppableId,
-                    dropStage: destination?.droppableId,
-                    dragIndex: source.index,
-                    hoverIndex: destination.index
-                }
-            )
-            dispatch( moveCard( {
+            dispatch( moveCard({
                 projectName: id,
                 dragStage: result.source.droppableId,
                 dropStage: result.destination.droppableId,

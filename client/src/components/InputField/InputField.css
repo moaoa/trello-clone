@@ -1,17 +1,26 @@
 .InputField {
-  margin-bottom: 1em;
-  padding: 10px;
+    margin-bottom: 1em;
+    padding: 10px;
 }
 
 .InputField input {
-  border: none;
-  outline: none;
-  padding: 5px;
-  border-bottom: #333 solid 1px;
-  width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-bottom: #333 solid 1px;
+    width: 100%;
+    transition: border 0.1s ease-in-out;
+    line-height: 1.2;
+    color: #333;
+    letter-spacing: 0.8px;
+    font-size: 14px;
 }
 
 .InputField input::placeholder {
-  text-transform: capitalize;
-  color: rgb(158, 157, 157);
+    text-transform: capitalize;
+    color: rgb(158, 157, 157);
+}
+
+.InputField input:focus {
+    border-bottom: rgb(41, 143, 226) 2px solid;
 }

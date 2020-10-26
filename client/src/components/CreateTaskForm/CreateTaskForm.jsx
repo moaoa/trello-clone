@@ -22,14 +22,16 @@ export default function CreateTaskForm({operation,  toggleModal, isOpen}) {
         <Modal toggleModal={toggleModal} isOpen={isOpen}>
             <div className='CreateTaskForm'>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <InputField 
+                    <InputField
+                        autoComplete="off" 
                         name="title" 
                         ref={register({required: true})} 
                         type="text"
                         placeholder='title'
                     />
                     {errors.title && <div>this field is required</div>}
-                    <InputField 
+                    <InputField
+                        autoComplete="off" 
                         name="description" 
                         ref={register({required: true})} 
                         type="text" 

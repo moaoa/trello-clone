@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import io from 'socket.io-client'
-import {BrowserRouter as Router, Route} from 'react-router-dom'
+// import io from 'socket.io-client'
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import HomePage from './Pages/Home'
 import AuthPage from './Pages/auth/auth'
 
@@ -16,8 +16,10 @@ function App() {
   return (
     <Router>
         <div className="App">
-          <Route path='/' exact component={HomePage}/>
-          <Route path='/auth' component={() => <AuthPage/>}/>
+          <Switch>
+            <Route path='/'  component={HomePage}/>
+            <Route path='/auth' component={() => <AuthPage/>}/>
+          </Switch>
         </div>
    
     </Router>
