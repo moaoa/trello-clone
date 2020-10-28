@@ -1,31 +1,33 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './CreateProjectForm.css'
 import Modal from '../Modal/Modal'
 import { useForm } from 'react-hook-form'
 import InputField from '../InputField/InputField'
 import {useDispatch} from 'react-redux'
-import {createProject} from '../../redux/actions/project'
+import {createProjectAsync} from '../../redux/actions/project'
 
 export default function CreateProjectForm({isOpen, toggleModal}) {
     const {register, handleSubmit, errors, reset}  = useForm()
     const dispatch = useDispatch()
     const onSubmit = data => {
         toggleModal()
-        dispatch(createProject(data))
+        dispatch(createProjectAsync(data))
         reset()
     }
     return (
         <Modal isOpen={isOpen} toggleModal={toggleModal}>
             <div className='CreateProjectForm'>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <InputField 
+                    <InputField
+                        autoComplete="off" 
                         name="projectName" 
                         ref={register({required: true})} 
                         type="text" 
                         placeholder='projectName'
                     />
                     {errors.title && <div>this field is required</div>}
-                    <InputField 
+                    <InputField
+                        autoComplete="off" 
                         name="imgUrl" 
                         ref={register()} 
                         type="text" 

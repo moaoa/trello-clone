@@ -6,7 +6,7 @@ import ProjectsList from '../ProjectsList/projectsList'
 function TeamsSidebar() {
    
     return (
-        <div className='TeamsSidebar'>
+        <div className='Sidebar'>
             <Header/>
             <ProjectsList/>
         </div>

@@ -8,7 +8,7 @@ export default function UserBox({email, imgUrl}) {
     if(imgUrl) userAvatar = <img src={imgUrl} alt="usr Image"/>
     return (
         <Link to='/'>
-            <div className='UserBox'>
+            <div className='UserBox cardShadow'>
                 {userAvatar}
                 <span>{email}</span>
             </div>

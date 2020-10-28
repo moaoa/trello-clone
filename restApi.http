@@ -1,3 +1,4 @@
+### sing up
 POST http://localhost:5000/auth/signUp
 Content-Type: application/json
 
@@ -7,7 +8,7 @@ Content-Type: application/json
     "name" : "moaad"
 }
 
-###
+### sign in
 
 POST http://localhost:5000/auth/signIn
 Content-Type: application/json
@@ -17,5 +18,12 @@ Content-Type: application/json
     "password": 123456
 }
 
-###
+### projects
 
+POST http://localhost:5000/projects
+Content-Type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Zjk3YzhkMzcwYzNjOTI3ZTQ4NGE2NDYiLCJpYXQiOjE2MDM4NzE5MTYsImV4cCI6MTYwMzk1ODMxNn0.EYk3BgBiNfbkPQiNeNeqBb7PeysCf8YrjrVnorCBwes
+
+{
+    "projectName": "Project 10"
+}

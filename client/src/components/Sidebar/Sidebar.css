@@ -1,3 +1,6 @@
-.TeamsSidebar {
+.Sidebar {
     grid-column: 1/3;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 5px 3px 5px rgb(230, 228, 228);
 }
