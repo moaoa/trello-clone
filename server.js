@@ -10,6 +10,11 @@ app.use(passport.initialize())
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 
+if(process.env.NODE_ENV !== 'production') {
+    let morgan = require('morgan')
+    app.use(morgan('combined'))
+}
+
 
 mongoose.connect(db_url, {
     useNewUrlParser: true,

@@ -5,7 +5,7 @@ const { Schema } = mongoose
 
 
 const UserSchema  = new Schema({
-    _id: mongoose.Types.ObjectId,
+    _id: String,
     imgUrl: String,
     name: String
 })

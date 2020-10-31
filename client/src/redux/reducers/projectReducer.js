@@ -4,7 +4,6 @@ import generateId, { moveCardUtil} from './projectUtils'
 
 
 const projectReducer = (state = {}, action) => {
-    console.log(action);
     switch(action.type){
         case constants.ADD_TASK:
             return {
@@ -16,7 +15,6 @@ const projectReducer = (state = {}, action) => {
             }
         case constants.CREATE_PROJECT_SUCCESS:
         let {_id, ...rest} = action.payload
-        console.log("rest: ", rest);
             return {
                 ...state,
                 [_id]: rest

@@ -10,7 +10,7 @@ function ProjectsList() {
             {
                 Object.keys(projects).map(key => {
                     const { imgUrl, projectName } = projects[key]
-                    return <ProjectItem key={key} imgUrl={imgUrl} projectName={projectName} />
+                    return <ProjectItem key={key} id={key} imgUrl={imgUrl} projectName={projectName} />
                 })
             }
         </div>

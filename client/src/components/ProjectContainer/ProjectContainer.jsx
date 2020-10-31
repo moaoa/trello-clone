@@ -14,7 +14,6 @@ export default function ProjectContainer() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const project = useSelector(state => state.project[id])
-    console.log(project);
     if(!project) return <Redirect to='/'/>
     return ( 
      
