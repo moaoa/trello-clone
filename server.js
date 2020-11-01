@@ -12,7 +12,7 @@ app.use(express.json())
 
 if(process.env.NODE_ENV !== 'production') {
     let morgan = require('morgan')
-    app.use(morgan('combined'))
+    app.use(morgan('tiny'))
 }
 
 

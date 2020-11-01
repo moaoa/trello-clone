@@ -1,10 +1,12 @@
 import constants from '../actions/constants'
-import generateId, { moveCardUtil} from './projectUtils'
+import generateId, { moveCardUtil, setProjects} from './projectUtils'
 
 
 
 const projectReducer = (state = {}, action) => {
     switch(action.type){
+        case constants.SET_PROJECTS:
+            return setProjects(action.payload)
         case constants.ADD_TASK:
             return {
                 ...state,

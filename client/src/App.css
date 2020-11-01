@@ -4,6 +4,7 @@
     column-gap: 20px;
     --badge-background: #eaeff0;
     --badge-color: #7f898d;
+    --primary-color: #4983ff;
 }
 .cardShadow {
     -webkit-box-shadow: 2px 2px 6px -4px rgba(0, 0, 0, 0.75);

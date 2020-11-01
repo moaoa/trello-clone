@@ -9,7 +9,7 @@ const projectSchema  = new Schema({
     required: true,
     },
     imgUrl: String,
-    admin: {type: mongoose.Types.ObjectId, ref: 'User'},
+    admin: {type: String },
     noStage: [{title: String, description: String}],
     inProgress: [{title: String, description: String}],
     completed: [{title: String, description: String}],

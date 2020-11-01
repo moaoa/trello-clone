@@ -1,0 +1,71 @@
+.LandingPage {
+    background-image: url('../../assets/stephanie-harvey-i8-e3LG0Z70-unsplash.jpg');
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
+    grid-column: 1/9;
+    position: relative;
+}
+header {
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+li {
+    padding: 0 10px;
+    color: white;
+    z-index: 5;
+}
+.trello-logo {
+    z-index: 5;
+    font-family: sans-serif;
+    text-transform: capitalize;
+    font-size: 1.5em;
+}
+.overlay-landingPage {
+    background-color: #333333;
+    opacity: 0.6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+}
+
+.signup-btn {
+    background-color: var(--primary-color);
+    padding: 10px 20px;
+    border: none;
+    color: white !important;
+    z-index: 5;
+    outline: none;
+    cursor: pointer;
+}
+.hero-section {
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    height: 70%;
+}
+.hero-section h1 {
+    z-index: 5;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+.hero-section p {
+    color: white;
+    z-index: 5;
+}

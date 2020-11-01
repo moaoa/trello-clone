@@ -30,3 +30,9 @@ export const moveCardUtil = (project, payload) => {
         [dropStage]: dropStageArr
     }
 }
+export const setProjects = (projects) => {
+    return projects.reduce((accemulated , currentProject) => {
+        accemulated[currentProject._id] = currentProject
+        return accemulated
+    }  , {})
+}

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import './App.css';
 // import io from 'socket.io-client'
 import {BrowserRouter as Router, Route, Switch, Redirect, useLocation} from 'react-router-dom'
@@ -6,10 +6,12 @@ import { useSelector , useDispatch} from 'react-redux'
 import ProjectPage from './Pages/ProjectPage/ProjectPage'
 import AuthPage from './Pages/auth/auth'
 import LandingPage from './Pages/LandingPage/LandingPage'
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { signInUserWithGoogle } from './redux/actions/authActions';
+import {setProjects} from './redux/actions/project'
+import  Axios from 'axios'
 
 
 function App() {
@@ -21,15 +23,33 @@ function App() {
   const user = useSelector(state => state.auth.user)
   const dispatch = useDispatch()
   const params = new URLSearchParams(useLocation().search)
+  
+  const token = params.get('token')
 
   useEffect(() => {
     if(params.has('token')){
-      console.log('has token : ', params.has('token'));
-      const token = params.get('token')
       params.delete('token')
       dispatch(signInUserWithGoogle(token))
     }
   }, [])
+
+  useEffect(() => {
+    if(user){
+      console.log('token frontend ', user.token);
+      Axios.get('/projects', {
+        headers: {
+          authorization: `Bearer ${user.token}`
+        }
+      })
+      .then(res => dispatch(setProjects(res.data.projects)))
+      .catch(e => {
+        console.log(e);
+        toast.error('Something Went Wrong')
+      })
+    }
+  }, [user])
+
+  
 
   return (
     <Router>

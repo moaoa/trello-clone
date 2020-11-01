@@ -7,9 +7,11 @@ export const createProjectStart = () => ({type: constants.CREATE_PROJECT_START})
 export const createProjectSuccess = (payload) => ({type: constants.CREATE_PROJECT_SUCCESS, payload})
 export const createProjectFailure = (payload) => ({type: constants.CREATE_PROJECT_FAILURE, payload})
 export const createProjectAsync = (payload) => {
-    return (dispatch, /* getState */) => {
+    return (dispatch, getState ) => {
+        const {auth: {user: {token}}} = getState()
         dispatch(createProjectStart())
-        sendProjectData(payload)
+
+        sendProjectData(payload, token)
         .then(response => {
             if(response.status === 201) dispatch(createProjectSuccess(response.data.project))
             else dispatch(createProjectFailure(response.statusText))
@@ -19,3 +21,4 @@ export const createProjectAsync = (payload) => {
 }
 export const moveCard = (payload) => ({type: constants.MOVE_CARD, payload})
 export const moveCardToEmptyStage = (payload) => ({type: constants.MOVE_CARD_TO_EMPTY_STAGE, payload})
+export const setProjects = (payload) => ({type: constants.SET_PROJECTS, payload})

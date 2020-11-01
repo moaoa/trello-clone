@@ -22,8 +22,15 @@ Content-Type: application/json
 
 POST http://localhost:5000/projects
 Content-Type: application/json
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Zjk3YzhkMzcwYzNjOTI3ZTQ4NGE2NDYiLCJpYXQiOjE2MDM4NzE5MTYsImV4cCI6MTYwMzk1ODMxNn0.EYk3BgBiNfbkPQiNeNeqBb7PeysCf8YrjrVnorCBwes
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjlkYjA3ZjJjMWRhMzEwZDAyYzViMjUiLCJpYXQiOjE2MDQxNjk4NTUsImV4cCI6MTYwNDI1NjI1NX0.oJqWcjqvw_fLtFB8di86yY-SZD-crJAjkr3AMKej52M
 
 {
-    "projectName": "Project 10"
+    "projectName": "Project 2"
 }
+
+
+###
+GET  http://localhost:5000/projects
+Content-Type:  application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjlkYjA3ZjJjMWRhMzEwZDAyYzViMjUiLCJpYXQiOjE2MDQxNjk4NTUsImV4cCI6MTYwNDI1NjI1NX0.oJqWcjqvw_fLtFB8di86yY-SZD-crJAjkr3AMKej52M
+

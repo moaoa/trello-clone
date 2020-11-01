@@ -20,7 +20,7 @@ passport.use(new GoogleStrategy({
         const { id, photos, displayName } = profile
         let user = await GoogleUser.findById(profile.id)
         if (!user) {
-            user = new GoogleUser({ _id: id, imgUrl: photos[0].value, name: displayName })
+            user = new GoogleUser({ _id: id, imgUrl: photos[0].value, name: displayName, email })
             await user.save()
         }
         const token = generateToken({ _id: user._id })
@@ -90,7 +90,9 @@ Router.post('/signIn', cors(), async (req, res) => {
 Router.get('/user', authMiddleware, async (req, res) => {
     try {
         const user = await GoogleUser.findById(req.user._id)
-        res.json({ user: pullProps(user, ['name', 'email', 'imgUrl']) })
+        const token = generateToken({_id: user._id})
+        const userProps = {...pullProps(user, ['name', 'email', 'imgUrl']) , token}
+        res.json({ user: userProps})
     } catch (error) {
         res.status(500)
     }
