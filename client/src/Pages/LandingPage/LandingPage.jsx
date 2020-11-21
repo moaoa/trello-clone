@@ -20,7 +20,6 @@ export default function LandingPage() {
                 <p>Trello boards, lists, and cards enable you to organize and priortize Your projects</p>
                 <button className="signup-btn">SIGN UP FOR FREE</button>
             </div>
-
         </div>
         </> 
     )

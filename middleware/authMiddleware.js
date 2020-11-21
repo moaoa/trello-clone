@@ -5,7 +5,6 @@ module.exports = (req, res, next) => {
     if (!token)
         return res.status(401).json({ msg: 'No Token autorization denied' });
     token = token.replace('Bearer ', '');
-    console.log('token : ', token);
     try {
         const decoded = jwt.verify(token, jwtSecret);
         req.user = decoded;

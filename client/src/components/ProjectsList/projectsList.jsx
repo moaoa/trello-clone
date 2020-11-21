@@ -7,12 +7,14 @@ function ProjectsList() {
     const projects = useSelector(state => state.project)
     return (
         <div className='ProjectsList'>
-            {
+            <h2>PROJECTS</h2>
+
+            {/* {
                 Object.keys(projects).map(key => {
                     const { imgUrl, projectName } = projects[key]
                     return <ProjectItem key={key} id={key} imgUrl={imgUrl} projectName={projectName} />
                 })
-            }
+            } */}
         </div>
     )
 }

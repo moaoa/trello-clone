@@ -2,9 +2,10 @@ body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     background-color: #f4f7f9;
+    --menu-item-color: rgba(0, 0, 0, 0.87);
 }
 
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+.menu-item-icon {
+    font-size: 30px;
+    margin-left: 20px;
 }

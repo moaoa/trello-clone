@@ -1,14 +1,16 @@
 import React from 'react'
 import './Sidebar.css'
-import Header from '../Header/Header'
-import ProjectsList from '../ProjectsList/projectsList'
+import SidebarItem from '../SidebarItem/SidebarItem'
+import { GrProjects } from 'react-icons/gr'
+import { AiOutlineProject } from 'react-icons/ai'
+
 
 function TeamsSidebar() {
    
     return (
         <div className='Sidebar'>
-            <Header/>
-            <ProjectsList/>
+            <SidebarItem Icon={GrProjects} title={'DASHBOARD'}  />
+            <SidebarItem Icon={AiOutlineProject} title={'MY PROJECTS'} />
         </div>
     )
 }

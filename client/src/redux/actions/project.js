@@ -1,7 +1,26 @@
 import constants from './constants'
 import sendProjectData from '../../API/sendProjectData'
+import Axios from 'axios'
+import { toast } from 'react-toastify';
 
-export const addTask = (projectId, stageName, task) => ({type: constants.ADD_TASK, stageName, task, projectId})
+export const addTask = (projectId, stageName, task) => ({type: constants.ADD_TASK_SUCCESS, stageName, task, projectId})
+export const addTaskAsync = (projectId, stageName, task) => {
+    return (dispatch, getState) => {
+        const state = getState()
+        Axios.post('/projects/task', {projectId, stageName, task}, {
+            headers:{
+                authorization: 'Bearer ' + state.auth.user.token
+            }
+        })
+        .then(res => {
+            if(res.status === 200) dispatch(addTask(projectId, stageName, task))
+        })
+        .catch(e => {
+            toast.error('something went wrong')
+            console.log(e);
+        })
+    }
+}
 
 export const createProjectStart = () => ({type: constants.CREATE_PROJECT_START})
 export const createProjectSuccess = (payload) => ({type: constants.CREATE_PROJECT_SUCCESS, payload})
@@ -20,5 +39,4 @@ export const createProjectAsync = (payload) => {
     }
 }
 export const moveCard = (payload) => ({type: constants.MOVE_CARD, payload})
-export const moveCardToEmptyStage = (payload) => ({type: constants.MOVE_CARD_TO_EMPTY_STAGE, payload})
 export const setProjects = (payload) => ({type: constants.SET_PROJECTS, payload})

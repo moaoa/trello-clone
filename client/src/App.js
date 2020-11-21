@@ -49,21 +49,19 @@ function App() {
     }
   }, [user])
 
-  
+
+  console.log('user : ', user);
 
   return (
     <Router>
         <div className="App">
           <ToastContainer/>
+            {!user && <Redirect  to='/landing' />}
           <Switch>
-          {/* routes Gards */}
-            {!user && <Redirect exact from='/' to='/landing'/>}
-            {!user && <Redirect from='/project' to='/auth' />}
-            {user && <Redirect  exact from ='/' to='/project' />}
-            {user && <Redirect from ='/auth' to='/project' />}
+            {!user  && <Redirect exact from='/' to='/auth' />}
             <Route path='/auth'  component={AuthPage}/>
             <Route path='/landing' component={LandingPage} />
-            <Route path='/project'  component={ProjectPage}/>
+            <Route path='/'  component={ProjectPage}/>
           </Switch>
         </div>
     </Router>

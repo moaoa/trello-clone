@@ -36,7 +36,7 @@ export default DroppableHoc(function NoStageBoard({tasks, provided, isDraggingOv
                 style={{backgroundColor: isDraggingOver? 'lightgray': '#f4f7f9'}}
             >
             {
-                tasks.map((task, index)=> <BoardItem stage='noStage' key={task.id} {...task} index={index}  />)
+                tasks.map((task, index)=> <BoardItem stage='noStage' key={task._id} {...task} index={index}  />)
             }
             </div>
             {provided.placeholder}

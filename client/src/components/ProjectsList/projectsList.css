@@ -1,0 +1,9 @@
+.ProjectsList {
+    display: flex;
+    align-items: center;
+}
+
+.ProjectsList h2 {
+    margin-left: 35px;
+    color: var(--menu-item-color);
+}

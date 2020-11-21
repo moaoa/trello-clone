@@ -7,6 +7,7 @@ import { Redirect, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { DragDropContext} from 'react-beautiful-dnd';
 import { moveCard } from '../../redux/actions/project'
+import Axios from 'axios'
 
 
 
@@ -14,6 +15,7 @@ export default function ProjectContainer() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const project = useSelector(state => state.project[id])
+    const token = useSelector(state => state.auth.user.token)
     if(!project) return <Redirect to='/'/>
     return ( 
      
@@ -26,14 +28,28 @@ export default function ProjectContainer() {
               ) {
                 return
               }
-            dispatch( moveCard({
-                projectName: id,
+
+              const dragData = {
+                projectId: id,
                 dragStage: result.source.droppableId,
                 dropStage: result.destination.droppableId,
                 dragIndex: result.source.index,
                 hoverIndex: result.destination.index
-
-            }))
+            }
+              dispatch(
+                moveCard(dragData)
+              )
+              Axios({
+                  method: 'PUT',
+                  url: '/projects/',
+                  headers:{
+                      authorization: 'Bearer ' + token
+                  },
+                  data:dragData
+              }).then(res => {
+                  if(res.status === 200) console.log(res.status);
+              })
+              .catch(console.log)
            
         }}>
             <ProjectDetails projectName={project.projectName} />

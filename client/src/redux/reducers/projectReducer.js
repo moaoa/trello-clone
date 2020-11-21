@@ -7,7 +7,7 @@ const projectReducer = (state = {}, action) => {
     switch(action.type){
         case constants.SET_PROJECTS:
             return setProjects(action.payload)
-        case constants.ADD_TASK:
+        case constants.ADD_TASK_SUCCESS:
             return {
                 ...state,
                 [action.projectId]:{
@@ -24,7 +24,7 @@ const projectReducer = (state = {}, action) => {
         case constants.MOVE_CARD:
             return {
                 ...state,
-                [action.payload.projectName]: moveCardUtil(state[action.payload.projectName], action.payload)
+                [action.payload.projectId]: moveCardUtil(state[action.payload.projectId], action.payload)
             }
        
         default: return state
