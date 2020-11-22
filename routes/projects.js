@@ -93,9 +93,11 @@ Router.get('/', auth, async (req, res) => {
     }
 })
 
-Router.get('/my-projects',async  (req, res) => {
+Router.get('/my-projects',auth,  async (req, res) => {
     // fetch from db
-    const projects = await Project.find()
+    console.log(req.user);
+    const projects = await Project.find({admin: req.user})
+    
     res.json(projects)
 })
 

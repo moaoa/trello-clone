@@ -7,9 +7,9 @@
 
 ## UI
 
-[x] endevisiual cardProject
-[] settings for cardProject (due Date, background Img, members invitation)
-[] my projects page
+[x] endevisiual projectCard
+[x] my projects page
+[] settings for projectCard (due Date, background Img, members invitation)
 
 ### backend and redux
 
@@ -18,3 +18,8 @@
 
 [] working on team members
 [] adding socket.io
+
+## bugs
+
+[x] log out
+[] fix login / signup links

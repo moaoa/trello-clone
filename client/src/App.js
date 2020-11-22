@@ -59,6 +59,8 @@ function App() {
             {!user && <Redirect  to='/landing' />}
           <Switch>
             {!user  && <Redirect exact from='/' to='/auth' />}
+            {user && <Redirect exact from='/' to='/dashboard'/>}
+            {user && <Redirect from='/auth' to='/dashboard'/>}
             <Route path='/auth'  component={AuthPage}/>
             <Route path='/landing' component={LandingPage} />
             <Route path='/'  component={ProjectPage}/>

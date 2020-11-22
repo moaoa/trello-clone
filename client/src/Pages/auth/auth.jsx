@@ -4,11 +4,13 @@ import InputField from '../../components/InputField/InputField'
 import { useForm } from 'react-hook-form'
 import {useDispatch} from 'react-redux'
 import {signInUserAsync, signUpUserAsync} from '../../redux/actions/authActions'
+import { useHistory } from 'react-router-dom'
 
 export default function InputAdornments() {
     const dispatch = useDispatch()
     const [isSignUp, setIsSignUp] = useState(true)
     const {register, handleSubmit, errors, reset, getValues}  = useForm()
+    const history = useHistory()
 
     const  onSubmit = async data => {
         if(isSignUp) {
@@ -17,6 +19,7 @@ export default function InputAdornments() {
             dispatch(signInUserAsync(data))
        }
        reset()
+    //    history.push('/dashboard')
     }
     const toggle = () => setIsSignUp(state => !state)
 
