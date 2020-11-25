@@ -69,7 +69,6 @@ Router.post('/task', auth, async (req, res) => {
     try {
         const {projectId, stageName, task}  = req.body
         const project = await Project.findById(projectId)
-        console.log(req.body);
         project[stageName] = [...project[stageName], {...task, id: genId()}]
          await project.save()
         res.status(200).send()
@@ -86,7 +85,6 @@ Router.get('/dashboard', auth, async (req, res) => {
 Router.get('/', auth, async (req, res) => {
     try {
         const projects =  await  Project.find({admin: req.user._id})
-        console.log(projects);
         res.json({projects})
     } catch (error) {
         console.log(error);
@@ -95,14 +93,12 @@ Router.get('/', auth, async (req, res) => {
 
 Router.get('/my-projects', auth ,  async (req, res) => {
     // fetch from db
-    console.log(req.user);
     const projects = await Project.find({admin: req.user})
     
     res.json(projects)
 })
 
 Router.put('/', auth , async (req, res) => {
-    console.log(req.body);
     try {
         let  project = await  Project.findById(req.body.projectId)    
         let modefiedProject = moveCardUtil(pullProps(project, projectProps), req.body)

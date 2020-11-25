@@ -1,6 +1,6 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-// import io from 'socket.io-client'
+import io from 'socket.io-client'
 import {BrowserRouter as Router, Route, Switch, Redirect, useLocation} from 'react-router-dom'
 import { useSelector , useDispatch} from 'react-redux'
 import ProjectPage from './Pages/ProjectPage/ProjectPage'
@@ -10,16 +10,19 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { signInUserWithGoogle } from './redux/actions/authActions';
-import {setProjects} from './redux/actions/project'
+import { setProjects } from './redux/actions/project'
 import  Axios from 'axios'
+const socket = io('http://localhost:5000',{
+  withCredentials: true
+})
+socket.on('connectoin', (arg) => console.log(arg))
 
 
 function App() {
-  // const socket = io('http://localhost:5000')
+
   
-  // socket.on('room', (socket) => {
-  //   console.log(socket);
-  // })
+  
+
   const user = useSelector(state => state.auth.user)
   const dispatch = useDispatch()
   const params = new URLSearchParams(useLocation().search)
@@ -35,7 +38,6 @@ function App() {
 
   useEffect(() => {
     if(user){
-      console.log('token frontend ', user.token);
       Axios.get('/projects', {
         headers: {
           authorization: `Bearer ${user.token}`
@@ -50,7 +52,6 @@ function App() {
   }, [user])
 
 
-  console.log('user : ', user);
 
   return (
     <Router>
