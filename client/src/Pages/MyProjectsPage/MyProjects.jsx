@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, {useEffect, useState} from 'react'
 import './MyProjects.css'
 import { useSelector } from 'react-redux'
-import ProjectCard from '../../components/TeamCard/TeamCard'
+import ProjectCard from '../../components/ProjectCard/ProjectCard'
 
 export default function MyProjects() {
     const [loading, setLoading] =  useState(true)

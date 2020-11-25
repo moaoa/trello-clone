@@ -36,13 +36,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function TeamCard({projectName, imgUrl, members, _id /*members */}) {
+export default function ProjectCard({projectName, imgUrl, members, _id /*members */, openModal, admin}) {
     const classes = useStyles()
     return (
         <Card className={classes.root}>
             <CardHeader
             action={
-                <IconButton aria-label='settings'>
+                <IconButton aria-label='settings' onClick={() => openModal(_id)}>
                     <FiMoreVertical/>
                 </IconButton>
             }
@@ -56,6 +56,7 @@ export default function TeamCard({projectName, imgUrl, members, _id /*members */
                 image={imgUrl}
             />
               <AvatarGroup style={{display: 'flex', justifyContent: 'flex-end'}} max={4}>
+                  <Avatar src={admin.imgUrl}></Avatar>
                 {
                   members?.map((member, i) => <Avatar src={member.imgUrl}  key={`${i}-${Date.now()}`} ></Avatar> )
                 }

@@ -19,7 +19,6 @@ export default function InputAdornments() {
             dispatch(signInUserAsync(data))
        }
        reset()
-    //    history.push('/dashboard')
     }
     const toggle = () => setIsSignUp(state => !state)
 
