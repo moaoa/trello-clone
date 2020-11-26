@@ -12,18 +12,21 @@ import 'react-toastify/dist/ReactToastify.css';
 import { signInUserWithGoogle } from './redux/actions/authActions';
 import { setProjects } from './redux/actions/project'
 import  Axios from 'axios'
-const socket = io('http://localhost:5000',{
-  withCredentials: true
-})
-socket.on('connectoin', (arg) => console.log(arg))
 
 
 function App() {
 
-  
-  
-
   const user = useSelector(state => state.auth.user)
+
+  let socket = io('http://localhost:5000', {
+  query:{
+    auth: user?.email
+  }
+})
+
+
+
+
   const dispatch = useDispatch()
   const params = new URLSearchParams(useLocation().search)
   
@@ -49,6 +52,14 @@ function App() {
         toast.error('Something Went Wrong')
       })
     }
+
+
+    socket = io('http://localhost:5000', {
+      query:{
+        auth: user?.email
+      }
+    })
+    socket.emit('setUser', {email: user?.email})
   }, [user])
 
 

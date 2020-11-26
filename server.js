@@ -9,10 +9,24 @@ const cors = require('cors')
 const io = require('socket.io')(server)
 const db_url = process.env.DB_URL
 
+const onlineUsers = {}
 
 // io 
 io.on('connection', (socket) => {
     console.log('user connected');
+
+    socket.on('setUser', data => {
+        console.log(data.email);
+        if(data.email) onlineUsers[data.email] = socket
+        console.log(onlineUsers);
+        console.log(Object.keys(onlineUsers));
+    })
+
+
+
+    // socket.on('disconnect', (socket) => {
+    //     delete onlineUsers[socket.query.auth]
+    // })
 })
 
 
