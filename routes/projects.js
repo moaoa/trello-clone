@@ -6,6 +6,8 @@ const pullProps = require('../utils/pullProps')
 const genId = require('../utils/genId')
 const projectProps = ['projectName', 'imgUrl', 'admin', 'noStage', 'inProgress', 'completed', '_id', 'members']
 const moveCardUtil = require('../utils/moveCard')
+const onlineUsers = require('../server')
+
 
 const dummyDate = {
     projects: [
@@ -82,6 +84,8 @@ Router.get('/dashboard', auth, async (req, res) => {
     const projects = await Project.find()
     res.json(projects)
 })
+
+// +++++++++++++++++++++++ check this one
 Router.get('/', auth, async (req, res) => {
     try {
         const projects =  await  Project.find({admin: req.user._id})
@@ -104,7 +108,6 @@ Router.put('/', auth , async (req, res) => {
         let modefiedProject = moveCardUtil(pullProps(project, projectProps), req.body)
 
         await project.updateOne(modefiedProject)
-        // await project.save()
         res.status(200).send()
     } catch (error) {
         console.log(error);
@@ -112,6 +115,9 @@ Router.put('/', auth , async (req, res) => {
     res.status(200).send()
 })
 
+Router.put('/invite', (req, res) => {
+    onlineUsers
+})
 
 
 module.exports = Router

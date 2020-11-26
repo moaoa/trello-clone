@@ -23,3 +23,4 @@
 
 [x] log out
 [] fix login / signup links
+[] drag cards to other stage gives null value // routes/projects : 105 line

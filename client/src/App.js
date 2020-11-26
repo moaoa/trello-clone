@@ -20,12 +20,9 @@ function App() {
 
   let socket = io('http://localhost:5000', {
   query:{
-    auth: user?.email
+    auth: user?._id
   }
 })
-
-
-
 
   const dispatch = useDispatch()
   const params = new URLSearchParams(useLocation().search)
@@ -54,12 +51,13 @@ function App() {
     }
 
 
-    socket = io('http://localhost:5000', {
-      query:{
-        auth: user?.email
-      }
-    })
-    socket.emit('setUser', {email: user?.email})
+    if(user) {
+      socket = io('http://localhost:5000', {
+        query:{
+          auth: user?._id
+        }
+      })
+    }
   }, [user])
 
 

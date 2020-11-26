@@ -50,7 +50,7 @@ Router.get('/google/redirect', cors(),
             const hashedPassword = await bcrypt.hash(password + '', 10)
             const newUser = new User({ email, password: hashedPassword, name, imgUrl })
             await newUser.save()
-            const userProps = pullProps(newUser, ['name', 'email', 'imgUrl'])
+            const userProps = pullProps(newUser, ['name', 'email', 'imgUrl', '_id'])
             const token = generateToken({ _id: newUser._id })
             res.status(201).json({
                 user: {
@@ -77,7 +77,7 @@ Router.post('/signIn', cors(), async (req, res) => {
         const match = await bcrypt.compare(password + '', user.password)
         if (match) {
             const token = generateToken({ _id: user._id })
-            const userProps = pullProps(user, ['name', 'email', 'imgUrl'])
+            const userProps = pullProps(user, ['name', 'email', 'imgUrl', '_id'])
             res.json({ user: { token, ...userProps } })
         } else {
             res.status(401).json({ msg: 'email or password is wrong' })
