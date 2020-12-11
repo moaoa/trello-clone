@@ -14,12 +14,13 @@ export default function AccountDetails() {
 
     }
     const user = useSelector(state => state.auth.user)
+    const notificationCssClass = user.invitations.length ? 'redNotification': ''
     const dispatch = useDispatch()
     if(!user) return <h3>loading</h3>
     return (
         <div className='AccountDetails'>
             <UserBox email={user.email || user.name} imgUrl={user.imgUrl}/>
-            <NotificationsBill/>
+            <NotificationsBill className={notificationCssClass} invitations={user.invitations}/>
             <button className='btn pointer' style={{backgroundColor: '#ccc7c7', marginLeft: '10px' }} onClick={handleLogOut}>logOUt</button>
         </div>
     )

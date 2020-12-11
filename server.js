@@ -5,17 +5,30 @@ const app = express()
 const server = require('http').createServer(app)
 const port  = process.env.PORT || 5000
 const mongoose =  require('mongoose')
+const User = require('./modals/User')
+const { model } = require('./modals/User')
 const io = require('socket.io')(server)
 const db_url = process.env.DB_URL
 
-const onlineUsers = {}
 
 // io connection and disconnection
-io.on('connection', (socket) => {
-    onlineUsers[socket.handshake.query.auth] = socket
-
-    socket.on('disconnect', () => {
-        if(socket.handshake.query && onlineUsers[socket.handshake.query.auth]) delete onlineUsers[socket.handshake.query.auth]
+io.on('connection',async (socket) => {
+    let user
+    if(socket.handshake.query && socket.handshake.query.auth && user) {
+        try {
+            user = await  User.findById(socket.handshake.query.auth)
+            user.socketId = socket.id  + ''
+            await user.save()
+            console.log('user after: ', user);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    socket.on('disconnect',async () => {
+        if(socket.handshake.query && socket.handshake.query.auth) {
+            user.socketId = 'offline'
+            await user.save()
+        }
     })
 })
 
@@ -43,4 +56,4 @@ app.use('/projects', require('./routes/projects'))
 
 server.listen(port , () => console.log('server running on port : ', port))
 
-module.exports.onlineUsers = onlineUsers
+module.exports = io

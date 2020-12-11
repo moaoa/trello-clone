@@ -1,12 +1,14 @@
 const express = require('express')
 const Router = express.Router()
 const Project = require('../modals/Project')
+const User = require('../modals/User')
 const auth = require('../middleware/authMiddleware')
 const pullProps = require('../utils/pullProps')
 const genId = require('../utils/genId')
 const projectProps = ['projectName', 'imgUrl', 'admin', 'noStage', 'inProgress', 'completed', '_id', 'members']
 const moveCardUtil = require('../utils/moveCard')
-const onlineUsers = require('../server')
+const io = require('../server')
+const generateToken = require('../utils/generateToken')
 
 
 const dummyDate = {
@@ -115,8 +117,37 @@ Router.put('/', auth , async (req, res) => {
     res.status(200).send()
 })
 
-Router.put('/invite', (req, res) => {
-    onlineUsers
+Router.put('/invite',auth, async (req, res) => {
+    const { email, projectId } = req.body
+
+    if(!email || !projectId) return res.status(400).json({msg: 'something went Wrong'})
+    let project , user, sender
+    try {
+        sender = await User.findById(req.user)
+        user = await User.findOne({email})
+        project = await Project.findById(projectId)
+        if(!user || !project) return  res.status(400).json({msg: 'something went Wrong'})
+        if(project.admin === req.user._id) {
+            
+            const invite = generateToken({invitedUserId: user._id, projectId: project._id})
+
+            user.invitations.push({
+                senderName: sender.name,
+                senderImgUrl: sender.imgUrl,
+                projectName: project.projectName
+                })
+            await user.save()
+            // not offline and not falsy
+            if(user.socketId !== 'offline' && user.socketId) {
+                io.to(user.socketId).emit('notfication', {invite} )
+            }
+            res.status(200).send()
+        }
+    } catch (error) {
+        console.log(error);
+        res.status(500).send()
+    }
+    
 })
 
 

@@ -5,4 +5,42 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+}
+
+.notification-menu{
+    width: 300px;
+}
+
+
+.redNotification::after{
+    content: ".";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: -5px;
+}
+
+.notification-menu ul{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.notification-menu li{
+    color: rgba(0, 0, 0, 0.87) !important;
+    position: relative;
+
+}
+.notification-menu li::after{
+    content: '.';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: black;
+    height: 10px;
 }

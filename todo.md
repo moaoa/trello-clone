@@ -10,6 +10,7 @@
 [x] endevisiual projectCard
 [x] my projects page
 [] settings for projectCard (due Date, background Img, members invitation)
+[] clear the invite field after the invitation was sent
 
 ### backend and redux
 

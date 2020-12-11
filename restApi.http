@@ -34,3 +34,13 @@ GET  http://localhost:5000/projects
 Content-Type:  application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjlkYjA3ZjJjMWRhMzEwZDAyYzViMjUiLCJpYXQiOjE2MDQxNjk4NTUsImV4cCI6MTYwNDI1NjI1NX0.oJqWcjqvw_fLtFB8di86yY-SZD-crJAjkr3AMKej52M
 
+
+###
+
+PUT  http://localhost:5000/projects/invite
+Content-Type:  application/json
+Authorization: : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1Zjk3YzhkMzcwYzNjOTI3ZTQ4NGE2NDYiLCJpYXQiOjE2MDc1Mjc0MzMsImV4cCI6MTYwNzYxMzgzM30.UJWilWvNL4lDOUN4OCXt_r5BhXbWk2VR-3CXf2C5fBg
+{
+    "projectId": ,
+    "userEmail": 
+}

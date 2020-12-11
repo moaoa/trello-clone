@@ -17,12 +17,15 @@ import  Axios from 'axios'
 function App() {
 
   const user = useSelector(state => state.auth.user)
-
-  let socket = io('http://localhost:5000', {
-  query:{
-    auth: user?._id
+  let socket
+  if(user) {
+    socket = io('http://localhost:5000', {
+      query:{
+        auth: user?._id
+      }
+    })
+    
   }
-})
 
   const dispatch = useDispatch()
   const params = new URLSearchParams(useLocation().search)

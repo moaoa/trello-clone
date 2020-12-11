@@ -8,6 +8,9 @@ const UserSchema  = new Schema({
     email: {type: String, required: true},
     password: {type: String, required: true},
     imgUrl: String,
+    socketId: String,
+    invitations: [{senderName: String, senderImgUrl: String, projectName: String}]
 })
 
 module.exports = mongoose.model('User', UserSchema)
+
