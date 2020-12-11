@@ -40,3 +40,7 @@ export const createProjectAsync = (payload) => {
 }
 export const moveCard = (payload) => ({type: constants.MOVE_CARD, payload})
 export const setProjects = (payload) => ({type: constants.SET_PROJECTS, payload})
+
+// invite actions
+export const addInvite = (invite) => ({type: constants.ADD_INVITE, payload: invite})
+export const removeInvite = (invite) => ({type: constants.REMOVE_INVITE, payload: invite})

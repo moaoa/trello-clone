@@ -14,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function NotificationsBill({className, invitations}) {
-  console.log('invitations', invitations.length);
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -35,22 +34,20 @@ export default function NotificationsBill({className, invitations}) {
     if(invitations &&  invitations.length) {
 
       
-      InvitationsPreview = () => {
-
-       return (
-        <div className='notification-menu'>
-          <ul>
-            {invitations.map((invite, i) => {
-              return <li key={`${i}-${Date.now()}`}>
-                you got invitation from   <strong> {invite.senderName } </strong> 
-                to join <strong>  {invite.projectName} </strong> project
-                </li>
-            })}
-          </ul>
-        </div>  
-       )
+      InvitationsPreview = (
+      <div className='notification-menu'>
+              <ul>
+                {invitations.map((invite, i) => {
+                  return <li key={`${i}-${Date.now()}`}>
+                    you got invitation from   <strong> {invite.senderName } </strong> 
+                    to join <strong>  {invite.projectName} </strong> project
+                    </li>
+                })}
+              </ul>
+        </div>  )
+     
       }
-    }
+    
 
     
   
@@ -72,7 +69,7 @@ export default function NotificationsBill({className, invitations}) {
                 horizontal: 'center',
                 }}
             >
-                <Typography className={classes.typography}><InvitationsPreview/></Typography>
+                <Typography className={classes.typography}>{InvitationsPreview}</Typography>
             </Popover>
 
             

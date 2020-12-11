@@ -25,7 +25,7 @@ io.on('connection',async (socket) => {
         }
     }
     socket.on('disconnect',async () => {
-        if(socket.handshake.query && socket.handshake.query.auth) {
+        if(socket.handshake.query && socket.handshake.query.auth && user) {
             user.socketId = 'offline'
             await user.save()
         }

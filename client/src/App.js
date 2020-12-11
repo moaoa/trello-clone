@@ -13,19 +13,12 @@ import { signInUserWithGoogle } from './redux/actions/authActions';
 import { setProjects } from './redux/actions/project'
 import  Axios from 'axios'
 
+ let socket
 
 function App() {
 
   const user = useSelector(state => state.auth.user)
-  let socket
-  if(user) {
-    socket = io('http://localhost:5000', {
-      query:{
-        auth: user?._id
-      }
-    })
-    
-  }
+ 
 
   const dispatch = useDispatch()
   const params = new URLSearchParams(useLocation().search)
@@ -57,11 +50,17 @@ function App() {
     if(user) {
       socket = io('http://localhost:5000', {
         query:{
-          auth: user?._id
+          auth: user._id
         }
+      })
+      socket.on('invite', (data) => {
+        console.log('invite from socket : ', data);
+        // add invite
       })
     }
   }, [user])
+
+  
 
 
 

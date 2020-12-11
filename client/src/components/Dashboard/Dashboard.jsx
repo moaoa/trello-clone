@@ -1,4 +1,4 @@
-import React , {useState, useEffect, useRef} from 'react'
+import React , {useState, useEffect} from 'react'
 import Calendar from 'react-calendar'
 import {AiOutlinePlus} from 'react-icons/ai'
 import 'react-calendar/dist/Calendar.css';
@@ -32,7 +32,6 @@ export default function Dashboard() {
             url: '/projects/dashboard'
         })
         .then(response => {
-            console.log('projects form frontend: ', response.data);
             dispatch(
                 setProjects(response.data)
             )

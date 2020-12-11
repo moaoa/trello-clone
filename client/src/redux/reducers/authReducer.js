@@ -1,4 +1,5 @@
 import constants from '../actions/constants'
+import {addInviteUtil, removeInviteUtil} from './userUtils'
 
 const initialState = {
     loading : false,
@@ -44,6 +45,11 @@ const authReducer = (state=initialState, action) => {
             }
         case constants.LOG_USER_OUT:
             return initialState
+
+        case constants.ADD_INVITE:
+            return addInviteUtil(state, action)
+        case constants.REMOVE_INVITE:
+            return removeInviteUtil(state, action)
         
         default: return state
     }
