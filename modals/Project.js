@@ -9,11 +9,12 @@ const projectSchema  = new Schema({
     required: true,
     },
     imgUrl: String,
-    admin: {type: String },
+    admin: {type: mongoose.Types.ObjectId, ref: 'User' },
     noStage: [{title: String, description: String}],
     inProgress: [{title: String, description: String}],
     completed: [{title: String, description: String}],
-    members: [{type: mongoose.Types.ObjectId}]
+    members: [{type: mongoose.Types.ObjectId, ref: 'User'}],
+    
 })
 
 projectSchema.pre('save', function() {

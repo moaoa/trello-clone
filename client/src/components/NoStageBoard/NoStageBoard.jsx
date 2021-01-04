@@ -8,13 +8,17 @@ import DroppableHoc from '../../Hoc/DroppableHoc'
 
 
 
-export default DroppableHoc(function NoStageBoard({tasks, provided, isDraggingOver}) {
+export default DroppableHoc(function NoStageBoard({tasks, provided, isDraggingOver, disabled }) {
     if(!tasks) tasks=[]
     const [isOpen, setIsOpen] = useState(false)
     const toggleModal= () => setIsOpen(prevState => !prevState)
 
     return (
         <div className={`NoStageBoard`}
+        style={{
+            transition: 'all 0.5s ease',
+            background: isDraggingOver? '#dbdee0': ''
+        }}
          >
             <CreateTaskFrom isOpen={isOpen} toggleModal={toggleModal} operation='noStage' />
             <div className='flex-spaceBetween'  >
@@ -29,7 +33,7 @@ export default DroppableHoc(function NoStageBoard({tasks, provided, isDraggingOv
                 ref={provided.innerRef} 
                 >
             {
-                tasks.map((task, index)=> <BoardItem stage='noStage' key={task._id} {...task} index={index}  />)
+                tasks.map((task, index)=> <BoardItem stage='noStage' key={task._id} {...task} index={index}  disabled={disabled} />)
             }
             </div>
             {provided.placeholder}

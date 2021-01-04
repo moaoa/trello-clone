@@ -88,6 +88,7 @@ Router.post('/signIn', cors(), async (req, res) => {
     }
 })
 Router.get('/user', authMiddleware, async (req, res) => {
+
     try {
         const user = await GoogleUser.findById(req.user._id)
         const token = generateToken({_id: user._id})
@@ -97,4 +98,6 @@ Router.get('/user', authMiddleware, async (req, res) => {
         res.status(500)
     }
 })
+
+
 module.exports = Router

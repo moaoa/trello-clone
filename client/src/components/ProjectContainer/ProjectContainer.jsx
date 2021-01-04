@@ -15,12 +15,21 @@ export default function ProjectContainer() {
     const { id } = useParams()
     const dispatch = useDispatch()
     const project = useSelector(state => state.project[id])
-    const token = useSelector(state => state.auth.user.token)
+    const user = useSelector(state => state.auth.user)
+    const token = user.token
+    const disabled = project.admin._id !== user._id
+    console.table(project.admin);
+    console.table(user);
+
     if(!project) return <Redirect to='/'/>
     return ( 
      
-        <DragDropContext onDragEnd={result =>{
+        <DragDropContext 
+        
+            
+            onDragEnd={result =>{
             const {destination, source} = result
+                        
             if(!destination ) return 
             if (
                 destination.droppableId === source.droppableId &&
@@ -53,9 +62,9 @@ export default function ProjectContainer() {
            
         }}>
             <ProjectDetails projectName={project.projectName} />
-            <NoStageBoard tasks={project.noStage} />
-            <InProgress tasks={project.inProgress} />
-            <CompletedBoard tasks={project.completed} />
+            <NoStageBoard tasks={project.noStage} disabled={disabled} />
+            <InProgress tasks={project.inProgress} disabled={disabled} />
+            <CompletedBoard tasks={project.completed} disabled={disabled} />
         </DragDropContext>
     )
 }

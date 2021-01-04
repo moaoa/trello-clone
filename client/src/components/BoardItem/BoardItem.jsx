@@ -4,9 +4,13 @@ import { Draggable } from 'react-beautiful-dnd';
 
 
 
-const BoardItem = ({title, description, _id, index}) => {
+const BoardItem = ({title, description, _id, index , disabled}) => {
     return (
-        <Draggable draggableId={`${_id}`} index={ index }>
+        <Draggable 
+            draggableId={`${_id}`}
+            index={ index } 
+            isDragDisabled={disabled}
+          >
             {
             (provided) => (
                 <div className='BoardItem cardShadow' 

@@ -1,7 +1,5 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './SidebarItem.css'
-import Modal from '../Modal/Modal'
-import CreateProjectFrom from '../CreateProjectForm/CreateProjectForm'
 import {NavLink} from 'react-router-dom'
 
 

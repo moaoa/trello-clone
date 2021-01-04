@@ -26,6 +26,17 @@ const projectReducer = (state = {}, action) => {
                 ...state,
                 [action.payload.projectId]: moveCardUtil(state[action.payload.projectId], action.payload)
             }
+        case constants.ADD_MEMBER: 
+            return {
+                ...state,
+                [action.payload.projectId] : {...state[action.payload.projectId], members: [...state[action.payload.projectId].members, action.payload.member ]}
+            }
+
+        case constants.EDIT_PROJECT:
+            return {
+                ...state,
+                [action.payload.project._id] : action.payload.project
+            }
        
         default: return state
     }

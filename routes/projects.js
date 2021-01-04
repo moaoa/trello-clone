@@ -7,8 +7,9 @@ const pullProps = require('../utils/pullProps')
 const genId = require('../utils/genId')
 const projectProps = ['projectName', 'imgUrl', 'admin', 'noStage', 'inProgress', 'completed', '_id', 'members']
 const moveCardUtil = require('../utils/moveCard')
-const io = require('../server')
 const generateToken = require('../utils/generateToken')
+const jwt = require('jsonwebtoken')
+
 
 
 const dummyDate = {
@@ -83,19 +84,18 @@ Router.post('/task', auth, async (req, res) => {
 })
 Router.get('/dashboard', auth, async (req, res) => {
     // filter the projects
-    const projects = await Project.find()
+    const projects = await Project.find({
+        $or: [
+            {'members': req.user._id},
+            {'admin': req.user._id }
+        ]
+    })
+    .populate('members', 'imgUrl name')
+    .populate('admin', 'imgUrl')
+    
     res.json(projects)
 })
 
-// +++++++++++++++++++++++ check this one
-Router.get('/', auth, async (req, res) => {
-    try {
-        const projects =  await  Project.find({admin: req.user._id})
-        res.json({projects})
-    } catch (error) {
-        console.log(error);
-    }
-})
 
 Router.get('/my-projects', auth ,  async (req, res) => {
     // fetch from db
@@ -121,33 +121,94 @@ Router.put('/invite',auth, async (req, res) => {
     const { email, projectId } = req.body
 
     if(!email || !projectId) return res.status(400).json({msg: 'something went Wrong'})
-    let project , user, sender
+    let project , user, sender 
     try {
         sender = await User.findById(req.user)
         user = await User.findOne({email})
         project = await Project.findById(projectId)
         if(!user || !project) return  res.status(400).json({msg: 'something went Wrong'})
-        if(project.admin === req.user._id) {
-            
-            const invite = generateToken({invitedUserId: user._id, projectId: project._id})
+        
+        if(project.admin.toJSON() === req.user._id) {
+            let memberExists = await Project.find({members: {
+                $in: [user._id]
+                }})
+               memberExists =  memberExists.length
+            if (memberExists) {
+                return res.send()
+            }
 
-            user.invitations.push({
+
+            const invite = generateToken({invitedUserId: user._id, projectId: project._id})
+            const inviteObject = {
                 senderName: sender.name,
                 senderImgUrl: sender.imgUrl,
-                projectName: project.projectName
-                })
-            await user.save()
-            // not offline and not falsy
-            if(user.socketId !== 'offline' && user.socketId) {
-                io.to(user.socketId).emit('notfication', {invite} )
-            }
-            res.status(200).send()
+                projectName: project.projectName,
+                inviteToken: invite
+                }
+
+            user.invitations.push(inviteObject)
+            // await user.save()
+            res.json({invite: inviteObject, socketId: user.socketId})
+        }
+        else{
+            res.status(400).send()
         }
     } catch (error) {
         console.log(error);
         res.status(500).send()
     }
     
+})
+
+Router.put('/accept-invite', async ( req, res ) => {
+    const invite = req.body.invite
+    try {
+        const { invitedUserId, projectId } = jwt.verify(invite.inviteToken, process.env.JWT_SECRET)
+        const project = await Project.findById(projectId)
+        project.members.push(invitedUserId)
+        const user = await User.findById(invitedUserId)
+        // pull means remove
+        user.invitations.pull(invite._id)
+        await project.save()
+        await user.save()
+        res.json({addedMember: pullProps(user, ['name', 'imgUrl', '_id']), projectId: projectId})
+    } catch (error) {
+       console.log(error); 
+       res.status(500).json({msg: "something went wrong"})
+    }
+})
+
+Router.put('/decline-invite', auth, async (req, res)=> {
+    const inviteId = req.body.invite._id
+    if(!inviteId) return res.status(400).send()
+
+    try {
+        const user = await User.findById(req.user)
+        user.invitations.pull(inviteId)
+        await user.save()
+        res.send()
+    } catch (error) {
+        console.log(error);
+        res.status(500).send()
+    }
+
+})
+
+
+Router.put('/edit', auth, async (req, res) => {
+    let project 
+    const {projectName, imgUrl} = req.body
+    try {
+        project = await Project.findById(req.body._id)
+        project.projectName = projectName
+        project.imgUrl = imgUrl
+        await project.save()
+        res.json(project)
+
+    } catch (error) {
+        res.status(500).json({msg: 'something went wrong'})
+        console.log(error);
+    }
 })
 
 

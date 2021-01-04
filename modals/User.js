@@ -9,7 +9,7 @@ const UserSchema  = new Schema({
     password: {type: String, required: true},
     imgUrl: String,
     socketId: String,
-    invitations: [{senderName: String, senderImgUrl: String, projectName: String}]
+    invitations: [{senderName: String, senderImgUrl: String, projectName: String, inviteToken: String}],
 })
 
 module.exports = mongoose.model('User', UserSchema)

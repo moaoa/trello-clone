@@ -44,3 +44,5 @@ export const setProjects = (payload) => ({type: constants.SET_PROJECTS, payload}
 // invite actions
 export const addInvite = (invite) => ({type: constants.ADD_INVITE, payload: invite})
 export const removeInvite = (invite) => ({type: constants.REMOVE_INVITE, payload: invite})
+export const addMember = (member, projectId) => ({type: constants.ADD_MEMBER, payload: { member, projectId } })
+export const editProject  = (project) => ({type: constants.EDIT_PROJECT, payload: {project}})

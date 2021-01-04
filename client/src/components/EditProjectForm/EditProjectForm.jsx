@@ -5,6 +5,8 @@ import InputField from '../InputField/InputField'
 import {useDispatch, useSelector} from 'react-redux'
 import {Card, CardMedia} from '@material-ui/core'
 import axios from 'axios'
+import {Context} from '../../App'
+import { editProject } from '../../redux/actions/project'
 
 export default function EditProjectForm({isOpen, toggleModal, projectId }) {
     const {register, handleSubmit, errors, reset}  = useForm()
@@ -12,12 +14,45 @@ export default function EditProjectForm({isOpen, toggleModal, projectId }) {
     const project = useSelector(state => state.project[projectId])
     const user = useSelector(state => state.auth.user)
     const [email, setEmail] = useState(null)
+    // const disabled = project?.admin._id !== user._id
+    
     
     const onSubmit = data => {
-        toggleModal()
-        // dispatch(createProjectAsync(data))
-        reset()
+        axios({
+            method: 'put',
+            headers:{
+                Authorization: 'Bearer '  + user.token
+            },
+            url: '/projects/edit',
+            data: {
+                _id: projectId,
+                ...data
+            }
+        }).then((res) => {
+            toggleModal()
+            console.log(res.data);
+            dispatch(editProject(res.data))
+            reset()
+        }).catch(err => console.log(err))
     }
+    const handleInvite = () => {
+        axios({
+            url: '/projects/invite',
+            method: 'put',
+            headers: {
+                Authorization: 'Bearer ' + user.token
+            },
+            data: {
+                projectId: project._id,
+                email
+            }
+        }).then(res =>{
+            context.sendInvite(res.data)
+        })
+        .catch(console.log)
+    }
+
+    const context  = React.useContext(Context)
     return (
         <Modal isOpen={isOpen} toggleModal={toggleModal}>
             <div className='CreateProjectForm'>
@@ -56,21 +91,8 @@ export default function EditProjectForm({isOpen, toggleModal, projectId }) {
                         onChange={(e) => setEmail(e.target.value)}
                         value={email}
                     />
-                    <button onClick={() => {
-                        console.log('invite sent');
-                        axios({
-                            url: '/projects/invite',
-                            method: 'put',
-                            headers: {
-                                Authorization: 'Bearer ' + user.token
-                            },
-                            data: {
-                                projectId: project._id,
-                                email
-                            }
-                        }).then(res => console.log(res))
-                        .catch(console.log)
-                    } }>invite</button>
+                    <button 
+                    onClick={handleInvite}>invite</button>
 
             </div>
         </Modal>

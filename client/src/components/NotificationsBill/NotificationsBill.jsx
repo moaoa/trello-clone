@@ -1,24 +1,68 @@
 import React from 'react'
+import {useDispatch} from 'react-redux'
+import {addInvite, removeInvite} from '../../redux/actions/project'
+import {addMember} from '../../redux/actions/project'
+import { toast } from 'react-toastify';
 import './NotificationsBill.css'
 import { BsFillBellFill } from "react-icons/bs";
 import { makeStyles } from '@material-ui/core/styles';
+import {Button} from '@material-ui/core'
 import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
-
+import axios from 'axios'
+import {useSelector} from 'react-redux'
+import {Context} from '../../App'
 
 const useStyles = makeStyles((theme) => ({
   typography: {
     padding: theme.spacing(2),
   },
+  btn: {
+    marginRight: 10,
+    fontWeight: 700
+  }
 }));
 
 
 export default function NotificationsBill({className, invitations}) {
+
+  const  user = useSelector(state => state.auth.user)
+
+  const inviteContext = React.useContext(Context)
+  
+  const dispatch = useDispatch()
+
+
+  const acceptInvite = (invite) => () => {
+    axios.put('/projects/accept-invite', {invite})
+    .then(res => {
+      if(res.status === 200) {
+        const {addedMember, projectId} = res.data
+        dispatch(addMember(addedMember, projectId))
+        dispatch(removeInvite(invite))
+        inviteContext.inviteAccepted(addedMember, projectId)
+
+      }
+    })
+    .catch(e =>{
+      console.log(e)
+      toast.error('Something Went Wrong')
+    })
+  }
+
+  const declineInvite = invite => () => {
+    axios.put('/projects/decline-invite', {invite}, {headers: {Authorization: 'Bearer ' + user.token} })
+    .then(res => {
+      if(res.status === 200) dispatch(removeInvite(invite))
+    })
+  }
+  
+
+
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClick = (event) => {
-        console.log('fire');
         if(!anchorEl) setAnchorEl(event.currentTarget);
         else setAnchorEl(null)
     };
@@ -38,18 +82,18 @@ export default function NotificationsBill({className, invitations}) {
       <div className='notification-menu'>
               <ul>
                 {invitations.map((invite, i) => {
-                  return <li key={`${i}-${Date.now()}`}>
-                    you got invitation from   <strong> {invite.senderName } </strong> 
-                    to join <strong>  {invite.projectName} </strong> project
-                    </li>
+                  return <li key={invite._id}>
+                            you got invitation from   <strong> {invite.senderName } </strong> 
+                            to join <strong>  { invite.projectName } </strong> project
+                           <Button onClick={acceptInvite(invite)} className={classes.btn} size='small' color="primary" variant="contained">Accept</Button>
+                           <Button onClick={declineInvite(invite)} className={classes.btn} size='small' color="secondary" variant="contained" >Decline</Button>
+                          <hr/>
+                        </li>
                 })}
               </ul>
         </div>  )
      
       }
-    
-
-    
   
     return (
         <div className={'NotificationsBill pointer cardShadow ' + className} onClick={handleClick}>
@@ -69,7 +113,9 @@ export default function NotificationsBill({className, invitations}) {
                 horizontal: 'center',
                 }}
             >
-                <Typography className={classes.typography}>{InvitationsPreview}</Typography>
+                <Typography className={classes.typography}>
+                  {InvitationsPreview}
+                  </Typography>
             </Popover>
 
             

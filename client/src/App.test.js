@@ -1,6 +1,7 @@
 
 import authReducer from '../src/redux/reducers/authReducer'
 import constants from '../src/redux/actions/constants'
+import projectReducer from '../src/redux/reducers/projectReducer'
 
 
 const initialState = {
@@ -73,5 +74,36 @@ it('should remove invitation from state', () => {
       invitations : []
     }
   })
+
+})
+
+
+it('should member to project members list', () => {
+
+  const mockState = {
+    '1234': {
+      members: [{name: 'user1'}, {name: 'user2'}]
+    },
+    '12345678': {
+      members: [{name: 'user1'}]
+    }
+  }
+
+
+  const  member3 = {
+    name: 'member3'
+  }
+
+  const newState = projectReducer(mockState, { type: constants.ADD_MEMBER, payload: {member: member3, projectId: '12345678'} } ) 
+
+  expect(newState).toEqual({
+    '1234': {
+      members: [{name: 'user1'}, {name: 'user2'}]
+    },
+    '12345678': {
+      members: [{name: 'user1'}, {name: 'member3'}]
+    }
+  })
+
 
 })

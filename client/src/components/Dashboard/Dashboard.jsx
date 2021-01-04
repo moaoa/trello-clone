@@ -9,6 +9,7 @@ import { setProjects } from '../../redux/actions/project'
 import {IconButton} from '@material-ui/core'
 import CreateProjectFrom from '../CreateProjectForm/CreateProjectForm'
 import EditProjectFrom from '../EditProjectForm/EditProjectForm'
+import {logUserOut} from '../../redux/actions/authActions'
 import './Dashboard.css'
 
 
@@ -36,7 +37,11 @@ export default function Dashboard() {
                 setProjects(response.data)
             )
         })
-        .catch(console.log)
+        .catch(e => {
+            console.log(e);
+            
+            if(e.message === 'Request failed with status code 400') dispatch(logUserOut())
+        })
     }, [])
 
     
