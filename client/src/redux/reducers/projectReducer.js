@@ -4,6 +4,7 @@ import generateId, { moveCardUtil, setProjects} from './projectUtils'
 
 
 const projectReducer = (state = {}, action) => {
+    console.log(action);
     switch(action.type){
         case constants.SET_PROJECTS:
             return setProjects(action.payload)
@@ -16,10 +17,10 @@ const projectReducer = (state = {}, action) => {
                 }
             }
         case constants.CREATE_PROJECT_SUCCESS:
-        let {_id, ...rest} = action.payload
+        let project = action.payload
             return {
                 ...state,
-                [_id]: rest
+                [project._id]: project
             }
         case constants.MOVE_CARD:
             return {
@@ -29,7 +30,15 @@ const projectReducer = (state = {}, action) => {
         case constants.ADD_MEMBER: 
             return {
                 ...state,
-                [action.payload.projectId] : {...state[action.payload.projectId], members: [...state[action.payload.projectId].members, action.payload.member ]}
+                [action.payload.projectId] : {
+
+                    ...state[action.payload.projectId],
+
+                     members: [
+                         ...state[action.payload.projectId].members,
+                        action.payload.member
+                     ]
+                    }
             }
 
         case constants.EDIT_PROJECT:

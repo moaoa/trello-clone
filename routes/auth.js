@@ -71,14 +71,15 @@ Router.post('/signIn', cors(), async (req, res) => {
     if (!email || !password) return res.status(400).json({ msg: 'all fields are required' })
 
     try {
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ email }).lean()
+
         if (!user) return res.status(401).json({ msg: 'email or password is wrong' })
 
         const match = await bcrypt.compare(password + '', user.password)
         if (match) {
             const token = generateToken({ _id: user._id })
-            const userProps = pullProps(user, ['name', 'email', 'imgUrl', '_id', 'invitations'])
-            res.json({ user: { token, ...userProps } })
+            
+            res.json({ user: { token, ...user, password: null } })
         } else {
             res.status(401).json({ msg: 'email or password is wrong' })
         }

@@ -129,10 +129,15 @@ Router.put('/invite',auth, async (req, res) => {
         if(!user || !project) return  res.status(400).json({msg: 'something went Wrong'})
         
         if(project.admin.toJSON() === req.user._id) {
-            let memberExists = await Project.find({members: {
-                $in: [user._id]
-                }})
-               memberExists =  memberExists.length
+            const projectObject = project.toObject();
+
+            // see if the user is already a member of this project
+            let memberExists = projectObject.members.find(
+                member => member.toJSON() === user._id.toJSON()
+                )
+
+            
+                // the user is indeed a member of the project so don't send any data to frontend
             if (memberExists) {
                 return res.send()
             }
@@ -147,7 +152,8 @@ Router.put('/invite',auth, async (req, res) => {
                 }
 
             user.invitations.push(inviteObject)
-            // await user.save()
+            await user.save()
+
             res.json({invite: inviteObject, socketId: user.socketId})
         }
         else{
@@ -166,12 +172,12 @@ Router.put('/accept-invite', async ( req, res ) => {
         const { invitedUserId, projectId } = jwt.verify(invite.inviteToken, process.env.JWT_SECRET)
         const project = await Project.findById(projectId)
         project.members.push(invitedUserId)
-        const user = await User.findById(invitedUserId)
+        const user = await User.findById(invitedUserId).select("name imgUrl _id").lean()
         // pull means remove
         user.invitations.pull(invite._id)
         await project.save()
         await user.save()
-        res.json({addedMember: pullProps(user, ['name', 'imgUrl', '_id']), projectId: projectId})
+        res.json({addedMember: user, project: project})
     } catch (error) {
        console.log(error); 
        res.status(500).json({msg: "something went wrong"})

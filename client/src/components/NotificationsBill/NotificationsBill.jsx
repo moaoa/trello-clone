@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {addInvite, removeInvite} from '../../redux/actions/project'
-import {addMember} from '../../redux/actions/project'
+import { createProjectSuccess} from '../../redux/actions/project'
 import { toast } from 'react-toastify';
 import './NotificationsBill.css'
 import { BsFillBellFill } from "react-icons/bs";
@@ -36,11 +36,11 @@ export default function NotificationsBill({className, invitations}) {
   const acceptInvite = (invite) => () => {
     axios.put('/projects/accept-invite', {invite})
     .then(res => {
-      if(res.status === 200) {
-        const {addedMember, projectId} = res.data
-        dispatch(addMember(addedMember, projectId))
+      if(res.status === 200) {  
+        const {addedMember, project} = res.data
+        dispatch(createProjectSuccess(project))
         dispatch(removeInvite(invite))
-        inviteContext.inviteAccepted(addedMember, projectId)
+        inviteContext.inviteAccepted(addedMember, project._id)
 
       }
     })

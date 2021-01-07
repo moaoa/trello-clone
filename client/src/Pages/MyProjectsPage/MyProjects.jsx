@@ -2,17 +2,18 @@ import axios from 'axios'
 import React, {useEffect, useState} from 'react'
 import './MyProjects.css'
 import { useSelector } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
 
 export default function MyProjects() {
+    const user = useSelector(state => state.auth.user)
     const [loading, setLoading] =  useState(true)
-
-    const token = useSelector(state => state.auth.user.token)
-    console.log(token);
-
     const [myProjects, setMyProjects] = React.useState([])
 
+    let token = user.token
+
     useEffect(() => {
+        if(user)
         axios({
             method: 'GET',
             headers: {
@@ -21,8 +22,6 @@ export default function MyProjects() {
             url: '/projects/my-projects'
         })
         .then(response => {
-            
-            console.log(response.data);
             setMyProjects(response.data)
         })
         .finally(() => setLoading(false))

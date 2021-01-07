@@ -25,23 +25,25 @@ export default function Dashboard() {
     const closeModal = () => setFormData(state => ({ isOpen: false, projectId: null }))
     
     useEffect(() => {
-        axios({
-            method: 'GET',
-            headers: {
-                authorization: "Bearer " + user.token
-            },
-            url: '/projects/dashboard'
-        })
-        .then(response => {
-            dispatch(
-                setProjects(response.data)
-            )
-        })
-        .catch(e => {
-            console.log(e);
-            
-            if(e.message === 'Request failed with status code 400') dispatch(logUserOut())
-        })
+        if(user) {
+                axios({
+                    method: 'GET',
+                    headers: {
+                        authorization: "Bearer " + user.token
+                    },
+                    url: '/projects/dashboard'
+                })
+                .then(response => {
+                    dispatch(
+                        setProjects(response.data)
+                    )
+                })
+                .catch(e => {
+                    console.log(e);
+                    
+                    if(e.message === 'Request failed with status code 400') dispatch(logUserOut())
+                })
+            }
     }, [])
 
     

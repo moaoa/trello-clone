@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import io from 'socket.io-client'
-import {BrowserRouter as Router, Route, Switch, Redirect, useLocation} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, Redirect, useLocation} from 'react-router-dom'
 import { useSelector , useDispatch} from 'react-redux'
 import ProjectPage from './Pages/ProjectPage/ProjectPage'
 import AuthPage from './Pages/auth/auth'
 import LandingPage from './Pages/LandingPage/LandingPage'
-import {  ToastContainer } from 'react-toastify';
+import {  toast, ToastContainer } from 'react-toastify';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { signInUserWithGoogle } from './redux/actions/authActions';
@@ -22,7 +22,8 @@ function App() {
   const user = useSelector(state => state.auth.user)
 
   const dispatch = useDispatch()
-  const params = new URLSearchParams(useLocation().search)
+  const location = useLocation()
+  const params = new URLSearchParams(location.search)
   
   const token = params.get('token')
 
@@ -53,12 +54,15 @@ function App() {
   const sendInvite = (data)  => {
     const socketId = data.socketId
     if(socketId && socketId !== 'offline')
-
     if(socket) socket.emit('notification', data)
   }
   const inviteAccepted = (addedMember, projectId) => {
     socket.emit('inviteAccepted', {addedMember, projectId})
   }
+
+
+ 
+ 
 
   return (
     <Context.Provider value={{sendInvite, inviteAccepted}}>
@@ -68,6 +72,8 @@ function App() {
               {!user && <Redirect  to='/landing' />}
             <Switch>
               {!user  && <Redirect exact from='/' to='/auth' />}
+              {!user && <Redirect from='/dashboard' to='/auth' />}
+              {!user && <Redirect from='/my-projects' to='/auth' />}
               {user && <Redirect exact from='/' to='/dashboard'/>}
               {user && <Redirect from='/auth' to='/dashboard'/>}
               <Route path='/auth'  component={AuthPage}/>

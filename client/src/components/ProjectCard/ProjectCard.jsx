@@ -37,7 +37,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ProjectCard({projectName, imgUrl, members, _id , openModal, admin}) {
-  console.log('_id : ', _id);
     const classes = useStyles()
     return (
         <Card className={classes.root}>

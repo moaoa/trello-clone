@@ -1,12 +1,12 @@
 import React from 'react'
-import Sidebar from '../../components/Sidebar/Sidebar'
+import NavigationContainer from '../../components/NavigationContainer/NavigationContainer'
 import Boards from '../../components/Boards/Boards'
 
 
 export default function Home() {
     return (
         <>
-            <Sidebar/>
+            <NavigationContainer/>
             <Boards/>  
         </>
     )
