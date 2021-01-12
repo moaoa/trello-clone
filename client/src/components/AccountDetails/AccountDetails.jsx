@@ -7,9 +7,6 @@ import {logUserOut} from '../../redux/actions/authActions'
 import { useHistory } from 'react-router-dom'
 
 export default function AccountDetails() {
- 
-
- 
 
     const history = useHistory()
     const handleLogOut = () => {

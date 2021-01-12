@@ -75,9 +75,7 @@ export default function NotificationsBill({className, invitations}) {
     const id = open ? 'simple-popover' : undefined;
     let InvitationsPreview  = null
     
-    if(invitations &&  invitations.length) {
-
-      
+    if(invitations &&  invitations.length) {      
       InvitationsPreview = (
       <div className='notification-menu'>
               <ul>

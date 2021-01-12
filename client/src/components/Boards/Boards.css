@@ -1,14 +1,21 @@
 .boards {
-    background-color: #f4f7f9;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 50px 50px 1fr;
-    gap: 15px;
-    grid-column: 3/9;
-    padding: 0 15px;
+  background-color: #f4f7f9;
+  height: 100vh;
+  padding: 0 15px;
+  grid-column: 2;
 }
 
 .boards > div {
-    padding: 20px 0;
+  padding: 20px 0;
+}
+
+@media (min-width: 1050px) {
+  .boards {
+    grid-column: 3/9;
+    display: grid;
+    /* grid-template-columns: repeat(3, 1fr); */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: 50px 50px 1fr;
+    gap: 15px;
+  }
 }

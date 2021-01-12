@@ -1,6 +1,11 @@
 .dashboard__projects {
-    display: grid;
+  display: grid;
+  column-gap: 10px;
+  margin: 20px 0;
+}
+
+@media (min-width: 700px) {
+  .dashboard__projects {
     grid-template-columns: 1fr 1fr;
-    column-gap: 10px;
-    margin: 20px 0;
+  }
 }
