@@ -11,6 +11,7 @@ import SidebarItem from '../SidebarItem/SidebarItem'
 import Drawer from './Drawer/Drawer'
 import NotificationsBill from '../../NotificationsBill/NotificationsBill';
 import grey from '@material-ui/core/colors/grey'
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,9 @@ export default function ButtonAppBar() {
   const closeDrawer = () => {
     setIsOpen(false)
   }
+  const user = useSelector(state => state.auth.user)
+  const notificationCssClass = user?.invitations?.length ? 'redNotification': ''
+
 
   return (
     <div className={classes.root}>
@@ -68,7 +72,7 @@ export default function ButtonAppBar() {
 
       </AppBar>
       <Drawer onClose={closeDrawer} isOpen={isOpen}>
-        <div style={{padding: "10px 20px"}}><NotificationsBill /></div>  
+        <div style={{padding: "10px 20px"}}><NotificationsBill className={notificationCssClass} invitations={user.invitations} /></div>  
           <div onClick={closeDrawer}><SidebarItem Icon={GrProjects} title={'DASHBOARD'}  /></div>
           <div onClick={closeDrawer}><SidebarItem Icon={AiOutlineProject} title={'MY PROJECTS'} /></div>
       </Drawer>
