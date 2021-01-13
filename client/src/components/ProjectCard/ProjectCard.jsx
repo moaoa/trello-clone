@@ -14,7 +14,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     padding: 10,
     minWidth: 275,
-    alignSelf: 'self-start'
+    alignSelf: 'self-start',
+    marginBottom: 20
   },
   media: {
     height: 0,

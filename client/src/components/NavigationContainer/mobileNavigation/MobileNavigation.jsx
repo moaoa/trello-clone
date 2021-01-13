@@ -12,6 +12,7 @@ import Drawer from './Drawer/Drawer'
 import NotificationsBill from '../../NotificationsBill/NotificationsBill';
 import grey from '@material-ui/core/colors/grey'
 import { useSelector } from 'react-redux'
+import LogOutButton from '../../LogOutButton/LogOutButton'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -75,6 +76,9 @@ export default function ButtonAppBar() {
         <div style={{padding: "10px 20px"}}><NotificationsBill className={notificationCssClass} invitations={user.invitations} /></div>  
           <div onClick={closeDrawer}><SidebarItem Icon={GrProjects} title={'DASHBOARD'}  /></div>
           <div onClick={closeDrawer}><SidebarItem Icon={AiOutlineProject} title={'MY PROJECTS'} /></div>
+          <div style={{paddingLeft: 10}}>
+            <LogOutButton/>
+          </div>
       </Drawer>
     </div>
   );

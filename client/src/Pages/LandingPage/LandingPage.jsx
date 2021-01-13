@@ -1,9 +1,10 @@
 import React from 'react'
 import './LandingPage.css'
 import {Link} from 'react-router-dom'
-import {  toast } from 'react-toastify';
+import { useSelector } from 'react-redux'
 
 export default function LandingPage() {
+    const user = useSelector(state => state.auth.user)
     
     
     return (
@@ -13,15 +14,14 @@ export default function LandingPage() {
             <header>
                 <div className='trello-logo'>trello</div>
                 <ul>
-                     <li className='pointer'><Link to='/project'>myProjects</Link></li>
-                     <li className='pointer'><Link to='/auth'>Login</Link></li>
+                     { user && <li className='pointer'><Link to='/project'>myProjects</Link></li>}
                      <li  className='signup-btn pointer'><Link to='/auth'>Sign Up</Link></li>
                 </ul>    
             </header>
             <div className="hero-section">
                 <h1>Get More Done</h1>
                 <p>Trello boards, lists, and cards enable you to organize and priortize Your projects</p>
-                <button className="signup-btn">SIGN UP FOR FREE</button>
+                <button className="signup-btn"><Link to='/auth'>SIGN UP FOR FREE</Link></button>
             </div>
         </div>
         </> 

@@ -1,4 +1,5 @@
 import React from 'react'
+import "./ProjectContainer.css"
 import NoStageBoard from '../NoStageBoard/NoStageBoard'
 import InProgress from '../InProgressBoard/InProgressBoard'
 import CompletedBoard from '../CompletedBoard/CompletedBoard'
@@ -62,9 +63,11 @@ export default function ProjectContainer() {
            
         }}>
             <ProjectDetails projectName={project.projectName} />
-            <NoStageBoard tasks={project.noStage} disabled={disabled} />
-            <InProgress tasks={project.inProgress} disabled={disabled} />
-            <CompletedBoard tasks={project.completed} disabled={disabled} />
+            <div className={"project-container"}>
+                <NoStageBoard tasks={project.noStage} disabled={disabled} />
+                <InProgress tasks={project.inProgress} disabled={disabled} />
+                <CompletedBoard tasks={project.completed} disabled={disabled} />
+            </div>
         </DragDropContext>
     )
 }

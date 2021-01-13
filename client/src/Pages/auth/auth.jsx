@@ -46,7 +46,7 @@ export default function InputAdornments() {
                         autoComplete="off" 
                         name="password" 
                         ref={register({required: true})} 
-                        type="text" 
+                        type="password" 
                         placeholder='password'
                     />
                     {errors.password && <div>this field is required</div>}
@@ -55,6 +55,7 @@ export default function InputAdornments() {
                             <InputField
                                 autoComplete='off'
                                 name="passwordConfirmation"
+                                type="password"
                                 placeholder='confirm password'
                                 ref={register({
                                     required:true,
@@ -72,7 +73,7 @@ export default function InputAdornments() {
                         <input 
                         className='btn' 
                         type="submit" 
-                        value="submit"
+                        value={isSignUp ? "Sign Up": "Sign In"}
                         />
                         <button onClick={() => {
                             window.open('http://localhost:5000/auth/google', '_self')

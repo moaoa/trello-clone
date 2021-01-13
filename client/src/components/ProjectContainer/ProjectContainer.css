@@ -1,0 +1,10 @@
+.project-container {
+  display: flex;
+  overflow-x: scroll;
+}
+
+@media (min-width: 1050px) {
+  .project-container {
+    justify-content: space-evenly;
+  }
+}

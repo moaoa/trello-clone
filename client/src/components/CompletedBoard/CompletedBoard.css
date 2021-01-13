@@ -1,4 +1,5 @@
 .CompletedBoard {
-    --badge-color: #cc7075;
-    --badge-background: #fbe3e3;
+  --badge-color: #cc7075;
+  --badge-background: #fbe3e3;
+  min-width: 250px;
 }

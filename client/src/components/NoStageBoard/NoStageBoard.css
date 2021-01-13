@@ -1,4 +1,5 @@
 .NoStageBoard {
-    --badge-background: #e2efff;
-    --badge-color: #83a5d6;
+  --badge-background: #e2efff;
+  --badge-color: #83a5d6;
+  min-width: 250px;
 }
