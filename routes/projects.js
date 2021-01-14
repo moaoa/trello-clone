@@ -100,6 +100,8 @@ Router.get('/dashboard', auth, async (req, res) => {
 Router.get('/my-projects', auth ,  async (req, res) => {
     // fetch from db
     const projects = await Project.find({admin: req.user})
+    .populate('members', 'imgUrl name')
+    .populate('admin', 'imgUrl')
     
     res.json(projects)
 })

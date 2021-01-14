@@ -18,16 +18,12 @@ export default function ProjectContainer() {
     const project = useSelector(state => state.project[id])
     const user = useSelector(state => state.auth.user)
     const token = user.token
-    const disabled = project.admin._id !== user._id
-    console.table(project.admin);
-    console.table(user);
-
+    
     if(!project) return <Redirect to='/'/>
+    const disabled = project.admin._id !== user._id
     return ( 
      
         <DragDropContext 
-        
-            
             onDragEnd={result =>{
             const {destination, source} = result
                         
