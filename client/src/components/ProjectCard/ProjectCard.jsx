@@ -9,6 +9,8 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import { red } from '@material-ui/core/colors';
 import {FiMoreVertical} from 'react-icons/fi'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,11 +41,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProjectCard({projectName, imgUrl, members, _id , openModal, admin}) {
     const classes = useStyles()
+    const user = useSelector(state => state.auth.user)
+
+    let isMyProject = admin._id === user._id
     return (
         <Card className={classes.root}>
             <CardHeader
             action={
-                <IconButton aria-label='settings' onClick={() => openModal(_id)}>
+                <IconButton aria-label='settings' onClick={() =>{
+                  if(isMyProject) openModal(_id)
+                  else toast.warning("you don't have access to Edit this project")
+                  
+                  }}>
                     <FiMoreVertical/>
                 </IconButton>
             }

@@ -8,21 +8,17 @@ import ProjectCard from '../ProjectCard/ProjectCard'
 import { setProjects } from '../../redux/actions/project'
 import {IconButton} from '@material-ui/core'
 import CreateProjectFrom from '../CreateProjectForm/CreateProjectForm'
-import EditProjectFrom from '../EditProjectForm/EditProjectForm'
 import {logUserOut} from '../../redux/actions/authActions'
 import './Dashboard.css'
 
 
-export default function Dashboard() {
+export default function Dashboard({ openEditModal }) {
     const [calendarDate, setCalendarDate] = useState(new Date())
     const user = useSelector(state => state.auth.user)
     const projects = useSelector(state => state.project)
     const dispatch = useDispatch()
     const [isOpen, setIsOpen] =  useState(false)
     const toggleModel = ()=> setIsOpen(state => !state)
-    const [formData, setFormData] = useState({isOpen: false, projectId: null})
-    const openModal = (id) => setFormData(state => ({ projectId: id, isOpen: true }))
-    const closeModal = () => setFormData(state => ({ isOpen: false, projectId: null }))
     
     useEffect(() => {
         if(user) {
@@ -46,17 +42,11 @@ export default function Dashboard() {
             }
     }, [])
 
-    
-
 
     return (
         <div className='dashboard'>
             <CreateProjectFrom isOpen={isOpen} toggleModal={toggleModel} />
-            <EditProjectFrom 
-                isOpen={formData.isOpen} 
-                toggleModal={closeModal}
-                projectId={formData.projectId}
-            />
+            
             <IconButton 
                 onClick={toggleModel}>
                 <AiOutlinePlus 
@@ -66,7 +56,7 @@ export default function Dashboard() {
             </IconButton>
             <div className='dashboard__projects'>
                 {
-                    Object.values(projects)?.map(project => <ProjectCard key={project._id} {...project} openModal={openModal} />)
+                    Object.values(projects)?.map(project => <ProjectCard key={project._id} {...project} openModal={openEditModal} />)
                 }
             </div>
             <div>

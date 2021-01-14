@@ -1,11 +1,10 @@
 import axios from 'axios'
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './MyProjects.css'
 import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
 import ProjectCard from '../../components/ProjectCard/ProjectCard'
 
-export default function MyProjects() {
+export default function MyProjects({ openEditModal }) {
     const user = useSelector(state => state.auth.user)
     const [loading, setLoading] =  useState(true)
     const [myProjects, setMyProjects] = React.useState([])
@@ -30,9 +29,8 @@ export default function MyProjects() {
     if(loading) return <div>loading</div>
     return (
         <div className='myProjectsPage'>
-
             {
-               myProjects.length ?  myProjects.map((project, i) => <ProjectCard key={`${i}-${Date.now()}`} {...project}/>): <h3>no projects</h3>
+               myProjects.length ?  myProjects.map((project, i) => <ProjectCard openModal={openEditModal} key={`${i}-${Date.now()}`} {...project}/>): <h3>no projects</h3>
             }            
         </div>
     )

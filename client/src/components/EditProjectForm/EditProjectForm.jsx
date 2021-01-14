@@ -81,7 +81,7 @@ export default function EditProjectForm({isOpen, toggleModal, projectId }) {
                         defaultValue={project?.imgUrl}
                     />
                     {errors.description && <div>this field is required</div>}
-                    <input className='btn' type="submit" value="CreateProject"/>
+                    <input className='btn' type="submit" value="EditProject"/>
                 </form>
 
                 <InputField
